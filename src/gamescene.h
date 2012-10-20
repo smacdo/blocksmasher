@@ -1,5 +1,5 @@
 /*
- * gameapp.h
+ * gamescene.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,38 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_GAMEAPP_H
-#define SCOTT_SIMPLEGL_GAMEAPP_H
+#ifndef SCOTT_SIMPLEGL_GAMESCENE_H
+#define SCOTT_SIMPLEGL_GAMESCENE_H
 
-#include <vector>
-#include <string>
-#include "gameappcontext.h"
-
+struct GameAppContext;
 class Renderer;
-class BaseGameScene;
 
-class GameApp
+/**
+ * Base class for all game play related code
+ */
+class BaseGameScene
 {
 public:
-    GameApp( int argc, char ** argv );
-    ~GameApp();
+    BaseGameScene();
+    virtual ~BaseGameScene();
 
-    void run( BaseGameScene * pGameScene );
-    void tick();
-    void doInput();
-    void doUpdate();
-    void doRender();
-
-private:
-    void startup();
-    void shutdown();
+    virtual void startup( GameAppContext& context ) = 0; // TODO: Pull this out
+    virtual void shutdown() = 0;
+    virtual void update() = 0;
+    virtual void render( Renderer& renderer ) = 0;
 
 private:
-    std::vector<std::string> mCommandLineArguments;
-    GameAppContext mContext;
-    Renderer * mpRenderer;
-    BaseGameScene * mpGameScene;
-    bool mWasShutdown;
+
 };
 
 #endif

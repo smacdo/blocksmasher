@@ -1,5 +1,5 @@
 /*
- * gameapp.h
+ * gameapp.cpp
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,38 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_GAMEAPP_H
-#define SCOTT_SIMPLEGL_GAMEAPP_H
-
-#include <vector>
-#include <string>
 #include "gameappcontext.h"
+#include "config.h"
 
-class Renderer;
-class BaseGameScene;
+#include <string>
+#include <vector>
+#include <SDL.h>
 
-class GameApp
+GameAppContext::GameAppContext()
+    : pWindow( NULL ),
+      pRenderer( NULL ),
+      glContext( NULL ),
+      isQuiting( false ),
+      display( "NULL", 0, 0, 0 ),
+      window( "SimpleGL Test",
+              SDL_WINDOWPOS_UNDEFINED,
+              SDL_WINDOWPOS_UNDEFINED,
+              DEFAULT_WINDOW_WIDTH,
+              DEFAULT_WINDOW_HEIGHT ),
+      window_count( 1 )
 {
-public:
-    GameApp( int argc, char ** argv );
-    ~GameApp();
 
-    void run( BaseGameScene * pGameScene );
-    void tick();
-    void doInput();
-    void doUpdate();
-    void doRender();
-
-private:
-    void startup();
-    void shutdown();
-
-private:
-    std::vector<std::string> mCommandLineArguments;
-    GameAppContext mContext;
-    Renderer * mpRenderer;
-    BaseGameScene * mpGameScene;
-    bool mWasShutdown;
-};
-
-#endif
+}

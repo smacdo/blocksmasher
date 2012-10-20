@@ -17,7 +17,7 @@
 #include "sprite.h"
 #include "utils.h"
 #include "math/vector2.h"
-#include "gameapp.h"        // for window width/height
+#include "config.h"        // for window width/height
 
 #include <SDL.h>
 #include <string>

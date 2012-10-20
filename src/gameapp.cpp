@@ -16,30 +16,121 @@
  */
 #include "gameapp.h"
 #include "utils.h"
+#include "renderer.h"
+#include "gamescene.h"
 
 #include <SDL.h>
 #include <string>
 #include <vector>
-#include <iostream>
+#include <cassert>
 
-GameAppContext::GameAppContext()
-    : display( "NULL",
-               0,
-               0,
-               0 ),
-      window( "SimpleGL Test",
-              SDL_WINDOWPOS_UNDEFINED,
-              SDL_WINDOWPOS_UNDEFINED,
-              DEFAULT_WINDOW_WIDTH,
-              DEFAULT_WINDOW_HEIGHT ),
-      window_count( 1 )
+/**
+ * Game application constructor
+ */
+GameApp::GameApp( int argc, char ** argv )
+    : mCommandLineArguments( &argv[0], &argv[argc] ),
+      mContext(),
+      mWasShutdown( false )
 {
 
 }
 
-GameAppContext InitGame( int argc, char ** argv )
+/**
+ * Game application destructor
+ */
+GameApp::~GameApp()
 {
-    GameAppContext context;
+    // In case we somehow forgot to clean up, do it as we're exiting
+    if ( !mWasShutdown )
+    {
+        shutdown();
+    }
+}
+
+/**
+ * Runs the game to completion
+ */
+void GameApp::run( BaseGameScene * pGameScene )
+{
+    // First start the game up! (Otherwise we might have some issues)
+    startup();
+
+    // Hold on to the game scene, we're going to need during execution
+    assert( pGameScene != NULL && "Cannot run a null game scene" );
+    mpGameScene = pGameScene;
+
+    mpGameScene->startup( mContext );
+
+    // Now keep running the game until the player decides to quit
+    while ( !mContext.isQuiting )
+    {
+        tick();
+    }
+
+    // Be a good person and clean up our mess before leaving
+    shutdown();
+}
+
+/**
+ * Executes a single time slice for the game
+ */
+void GameApp::tick()
+{    
+    doInput();
+    doUpdate();
+    doRender();
+}
+
+/**
+ * Check for any new input that has occurred since the last time we
+ * checked for input
+ */
+void GameApp::doInput()
+{
+    SDL_Event event;
+
+    // Check for any input or window events
+    while ( SDL_PollEvent( &event ) )
+    {
+        // Did the player press exit?
+        if ( event.type == SDL_QUIT )
+        {
+            mContext.isQuiting = true;
+        }
+    }
+}
+
+/**
+ * Updates all active game objects
+ */
+void GameApp::doUpdate()
+{
+    assert( mpGameScene != NULL && "How on earth did you become null?" );
+    mpGameScene->update();
+}
+
+/**
+ * Draws all active game objects on the screen
+ */
+void GameApp::doRender()
+{
+    assert( mpRenderer != NULL && "Kinda hard to render when it's null..." );
+    assert( mpGameScene != NULL && "Cannot render a null game scene" );
+
+    // Clear the screen before letting the active game scene take a crack at
+    // drawing
+    mpRenderer->clear();
+    mpGameScene->render( *mpRenderer );
+
+    // Go go drawing
+    mpRenderer->present();
+}
+
+/**
+ * Game application start up code
+ */
+void GameApp::startup()
+{
     SDL_Log( "The game is starting up\n" );
 
     // Allow SDL logging
@@ -63,7 +154,7 @@ GameAppContext InitGame( int argc, char ** argv )
         {
             const char * driverName = SDL_GetVideoDriver(i);
             
-            context.drivers.push_back( driverName );
+            mContext.drivers.push_back( driverName );
             SDL_Log( "Found %s video driver\n", driverName );
         }
     }
@@ -78,14 +169,14 @@ GameAppContext InitGame( int argc, char ** argv )
     Uint32 windowFlags = SDL_WINDOW_SHOWN |
                          SDL_WINDOW_RESIZABLE; // SDL_WINDOW_INPUT_GRABBED
 
-    context.pWindow = SDL_CreateWindow( context.window.title,
-                                        context.window.x,
-                                        context.window.y,
-                                        context.window.width,
-                                        context.window.height,
-                                        windowFlags );
+    mContext.pWindow = SDL_CreateWindow( mContext.window.title,
+                                         mContext.window.x,
+                                         mContext.window.y,
+                                         mContext.window.width,
+                                         mContext.window.height,
+                                         windowFlags );
 
-    if ( context.pWindow == NULL )
+    if ( mContext.pWindow == NULL )
     {
         raiseError( "Failed to create main window", EERROR_SDL );
     }
@@ -95,38 +186,53 @@ GameAppContext InitGame( int argc, char ** argv )
                          SDL_RENDERER_PRESENTVSYNC |
                          SDL_RENDERER_TARGETTEXTURE;
 
-    context.pRenderer = SDL_CreateRenderer( context.pWindow,
-                                            -1,
-                                            renderFlags );
+    mContext.pRenderer = SDL_CreateRenderer( mContext.pWindow,
+                                             -1,
+                                             renderFlags );
 
-    if ( context.pRenderer == NULL )
+    if ( mContext.pRenderer == NULL )
     {
         raiseError( "Failed to create hardware accelerated renderer",
                     EERROR_SDL );
     }
 
+    // Set up our renderer
+    mpRenderer = new Renderer( mContext.pRenderer );
+
     // So what happened?
     SDL_Log( "Using %s video driver\n", SDL_GetCurrentVideoDriver() );
-
-    return context;
 }
 
-void DestroyGame( GameAppContext& context )
+/**
+ * Game application shutdown code
+ */
+void GameApp::shutdown()
 {
-    if ( context.glContext )
+    assert( !mWasShutdown && "Cannot shutdown more than once" );
+
+    // Destroy the active game scene
+    mpGameScene->shutdown();
+    delete mpGameScene;
+
+    // Destroy the game renderer
+    delete mpRenderer;
+
+    if ( mContext.glContext )
     {
-        SDL_GL_DeleteContext( context.glContext );
+        SDL_GL_DeleteContext( mContext.glContext );
     }
 
-    if ( context.pRenderer != NULL )
+    if ( mContext.pRenderer != NULL )
     {
-        SDL_DestroyRenderer( context.pRenderer );
+        SDL_DestroyRenderer( mContext.pRenderer );
     }
 
-    if ( context.pWindow != NULL )
+    if ( mContext.pWindow != NULL )
     {
-        SDL_DestroyWindow( context.pWindow );
+        SDL_DestroyWindow( mContext.pWindow );
     }
 
     SDL_Quit();
+
+    mWasShutdown = true;
 }
