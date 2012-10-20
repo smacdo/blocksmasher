@@ -26,10 +26,10 @@
 /**
  * Application entry point
  */
-int main( int argc, char* argv[] )
+int main( int argc, char **argv )
 {
     // Start the game up
-    GameAppContext app = InitGame();
+    GameAppContext app = InitGame( argc, argv );
     Renderer renderer( app.pRenderer );
 
     // Create a sprite to bounce around

@@ -19,6 +19,13 @@
 
 #include <string>
 
-void raiseError( const std::string& error );
+enum EErrorType
+{
+    EERROR_APP,
+    EERROR_SYSTEM,
+    EERROR_SDL
+};
+
+void raiseError( const std::string& error, EErrorType type = EERROR_APP );
 
 #endif

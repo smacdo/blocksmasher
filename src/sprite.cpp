@@ -23,41 +23,6 @@
 #include <string>
 #include <iostream>
 
-// TODO: move this
-Sprite * LoadSpriteFromFile( SDL_Renderer *pRenderer,
-                             const std::string& file )
-{
-    // Load the texture image from a file
-    SDL_Surface *pSurface = SDL_LoadBMP( file.c_str() );
-
-    // Make sure the file loaded
-    if ( pSurface == NULL )
-    {
-        raiseError( "Failed to open texture file" );
-    }
-
-    // Convert the SDL surface into a texture
-    SDL_Texture * pTexture = SDL_CreateTextureFromSurface( pRenderer,
-                                                           pSurface );
-
-    if ( pTexture == NULL )
-    {
-        raiseError( "Failed to create SDL texture from image" );
-    }
-
-    // Query the dimensions of the image before destroying the SDL surface
-    //  (Since we already copied it into an SDL texture)
-    float width  = static_cast<float>( pSurface->w );
-    float height = static_cast<float>( pSurface->h );
-
-    Vector2 size = Vector2( width, height );
-
-    SDL_FreeSurface( pSurface );
-
-    // Create a sprite to hold the texture, and return it to the caller
-    return new Sprite( pTexture, size, Vector2::ZERO );
-}
-
 Sprite::Sprite( SDL_Texture *pTexture,
                 const Vector2& size,
                 const Vector2& position )
@@ -138,12 +103,12 @@ void Sprite::update()
     float x = mPosition.x();
     float y = mPosition.y();
 
-    if ( x < 0.0f || x >= ( WINDOW_WIDTH - width() ) )
+    if ( x < 0.0f || x >= ( DEFAULT_WINDOW_WIDTH - width() ) )
     {
         mVelocity *= Vector2( -1.0f, 1.0f );
     }
 
-    if ( y < 0.0f || y >= ( WINDOW_HEIGHT - height() ) )
+    if ( y < 0.0f || y >= ( DEFAULT_WINDOW_HEIGHT - height() ) )
     {
         mVelocity *= Vector2( 1.0f, -1.0f );
     }

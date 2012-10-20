@@ -17,9 +17,29 @@
 #include "utils.h"
 #include <string>
 #include <iostream>
+#include <SDL_log.h>
+#include <SDL_error.h>
 
-void raiseError( const std::string& error )
+void raiseError( const std::string& error, EErrorType errorType )
 {
-    std::cout << "ERROR: " << error << std::endl;
+    // Give additional details, if possible
+    switch ( errorType )
+    {
+        case EERROR_SDL:
+            SDL_LogError(
+                SDL_LOG_CATEGORY_APPLICATION,
+                "ERROR: %s\nSDL Details: %s",
+                error.c_str(),
+                SDL_GetError() );
+            break;
+
+        default:
+            SDL_LogError(
+                SDL_LOG_CATEGORY_APPLICATION,
+                "ERROR: %s\n", 
+                error.c_str() );
+            break;
+    }
+
     exit( 2 );
 }

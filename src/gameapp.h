@@ -17,8 +17,11 @@
 #ifndef SCOTT_SIMPLEGL_GAMEAPP_H
 #define SCOTT_SIMPLEGL_GAMEAPP_H
 
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 480;
+#include <vector>
+#include <string>
+
+const int DEFAULT_WINDOW_WIDTH = 640;
+const int DEFAULT_WINDOW_HEIGHT = 480;
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -31,22 +34,49 @@ struct GameAppContext
     SDL_Renderer * pRenderer;
     void * glContext;
 
-    const char * video_driver;
-    int display;
-    const char * window_title;
-    const char * window_icon;
-    int window_x;
-    int window_y;
-    int window_width;
-    int window_height;
-    int depth;
-    int refresh_rate;
-    int num_windows;
+    /**
+     * List of video drivers available on this system
+     */
+    std::vector<std::string> drivers;
+
+    struct display_t
+    {
+        display_t( const char *driver_, int display_, int depth_, int refresh_ )
+            : video_driver(driver_),
+              display(display_),
+              depth(depth_),
+              refresh_rate(refresh_)
+        {
+        }
+
+        const char * video_driver;
+        int display;
+        int depth;
+        int refresh_rate;
+    } display;
+
+    struct window_t
+    {
+        window_t( const char * title_, int x_, int y_, int width_, int height_ )
+            : title(title_), x(x_), y(y_), width(width_), height(height_)
+        {
+        }
+
+        const char * title;
+        const char * icon;
+        int x;
+        int y;
+        int width;
+        int height;
+
+    } window;
+
+    int window_count;
 
     SDL_Window ** pWindows;
 };
 
-GameAppContext InitGame();
+GameAppContext InitGame( int argc, char ** argv  );
 void DestroyGame( GameAppContext& context );
 
 #endif
