@@ -1,0 +1,8 @@
+build/*
+game/*
+ipch/*
+*.swp
+*.opensdf
+*.sdf
+*.suo
+*.vcxproj.user
