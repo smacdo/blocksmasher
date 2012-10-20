@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "gameapp.h"
+#include "basegameapp.h"
 #include "utils.h"
 #include "renderer.h"
 #include "gamescene.h"

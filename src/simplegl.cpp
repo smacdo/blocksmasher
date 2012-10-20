@@ -16,7 +16,7 @@
  */
 
 #include "simplegl.h"
-#include "gameapp.h"
+#include "basegameapp.h"
 #include "scenes/breakoutlevelscene.h"
 
 #include <SDL.h>

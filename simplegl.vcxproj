@@ -155,7 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\gameapp.cpp" />
+    <ClCompile Include="src\basegameapp.cpp" />
     <ClCompile Include="src\gameappcontext.cpp" />
     <ClCompile Include="src\gamescene.cpp" />
     <ClCompile Include="src\math\vector.cpp" />
@@ -168,7 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\config.h" />
-    <ClInclude Include="src\gameapp.h" />
+    <ClInclude Include="src\basegameapp.h" />
     <ClInclude Include="src\gameappcontext.h" />
     <ClInclude Include="src\math\vector2.h" />
     <ClInclude Include="src\renderer.h" />
