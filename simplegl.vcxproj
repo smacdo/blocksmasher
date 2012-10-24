@@ -158,6 +158,7 @@
     <ClCompile Include="src\basegameapp.cpp" />
     <ClCompile Include="src\gameappcontext.cpp" />
     <ClCompile Include="src\gamescene.cpp" />
+    <ClCompile Include="src\gametime.cpp" />
     <ClCompile Include="src\math\vector.cpp" />
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\scenes\breakoutlevelscene.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="src\config.h" />
     <ClInclude Include="src\basegameapp.h" />
     <ClInclude Include="src\gameappcontext.h" />
+    <ClInclude Include="src\gametime.h" />
     <ClInclude Include="src\math\vector2.h" />
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\scenes\breakoutlevelscene.h" />

@@ -23,6 +23,7 @@
 
 class Renderer;
 class BaseGameScene;
+class GameTime;
 
 class GameApp
 {
@@ -31,10 +32,10 @@ public:
     ~GameApp();
 
     void run( BaseGameScene * pGameScene );
-    void tick();
-    void doInput();
-    void doUpdate();
-    void doRender();
+    void tick( const GameTime& time );
+    void doInput( const GameTime& time );
+    void doUpdate( const GameTime& time );
+    void doRender( const GameTime& time );
 
 private:
     void startup();

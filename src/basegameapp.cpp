@@ -18,10 +18,12 @@
 #include "utils.h"
 #include "renderer.h"
 #include "gamescene.h"
+#include "gametime.h"
 
 #include <SDL.h>
 #include <string>
 #include <vector>
+#include <stdint.h>
 #include <cassert>
 
 /**
@@ -62,9 +64,25 @@ void GameApp::run( BaseGameScene * pGameScene )
     mpGameScene->startup( mContext );
 
     // Now keep running the game until the player decides to quit
+    float timerFreq   = static_cast<float>(SDL_GetPerformanceFrequency());
+    float elapsedTime = 0.0f;
+    float gameTime    = 0.0f;
+    float lastTime    = static_cast<float>( SDL_GetPerformanceCounter() );
+    float nowTime     = static_cast<float>( SDL_GetPerformanceCounter() );
+
     while ( !mContext.isQuiting )
     {
-        tick();
+        // Calculate the amount of time that has passed
+        timerFreq    = static_cast<float>(SDL_GetPerformanceFrequency());
+        nowTime      = static_cast<float>(SDL_GetPerformanceCounter());
+        elapsedTime  = ( nowTime - lastTime ) / timerFreq;
+        gameTime    += elapsedTime;
+
+        // Update the simulation
+        tick( GameTime( elapsedTime, gameTime ) );
+
+        // Update timer
+        lastTime = nowTime;
     }
 
     // Be a good person and clean up our mess before leaving
@@ -74,18 +92,18 @@ void GameApp::run( BaseGameScene * pGameScene )
 /**
  * Executes a single time slice for the game
  */
-void GameApp::tick()
+void GameApp::tick( const GameTime& time )
 {    
-    doInput();
-    doUpdate();
-    doRender();
+    doInput( time );
+    doUpdate( time );
+    doRender( time );
 }
 
 /**
  * Check for any new input that has occurred since the last time we
  * checked for input
  */
-void GameApp::doInput()
+void GameApp::doInput( const GameTime& time )
 {
     SDL_Event event;
 
@@ -103,7 +121,7 @@ void GameApp::doInput()
 /**
  * Updates all active game objects
  */
-void GameApp::doUpdate()
+void GameApp::doUpdate( const GameTime& time )
 {
     assert( mpGameScene != NULL && "How on earth did you become null?" );
     mpGameScene->update();
@@ -112,7 +130,7 @@ void GameApp::doUpdate()
 /**
  * Draws all active game objects on the screen
  */
-void GameApp::doRender()
+void GameApp::doRender( const GameTime& time )
 {
     assert( mpRenderer != NULL && "Kinda hard to render when it's null..." );
     assert( mpGameScene != NULL && "Cannot render a null game scene" );
