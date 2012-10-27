@@ -1,5 +1,5 @@
 /*
- * sprite.h
+ * ball.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,35 +14,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_SPRITE_H
-#define SCOTT_SIMPLEGL_SPRITE_H
+#ifndef SCOTT_BREAKOUT_BALL_H
+#define SCOTT_BREAKOUT_BALL_H
 
-#include <string>
 #include "math/vector2.h"
 
-struct SDL_Texture;
-struct SDL_Renderer;
+class Sprite;
 
-class Sprite
+/**
+ * A ball that bounces around the game screen according to pseudo physics
+ */
+class Ball
 {
 public:
-    Sprite( SDL_Texture * pTexture, const Vector2& size );
-    ~Sprite();
+    Ball( Sprite * pSprite,
+          const Vector2& position,
+          const Vector2& veloicty );
+    ~Ball();
 
-    const SDL_Texture * getTexture() const;
+    const Sprite * sprite() const;
 
-    void setSize( const Vector2& newSize );
     Vector2 size() const;
 
+    Vector2 position() const;
+    void setPosition( const Vector2& position );
+
+    Vector2 velocity() const;
+    void setVelocity( const Vector2& velocity );
+
+    void update();
+
+    float width() const;
+    float height() const;
+
 private:
-    SDL_Texture * mpTexture;
-    Vector2 mOriginalSize;
+    Sprite * mpSprite;
     Vector2 mSize;
+    Vector2 mPosition;
+    Vector2 mVelocity;
 };
-
-
-// TODO: Move this into a loader class
-Sprite * LoadSpriteFromFile( SDL_Renderer *pRenderer,
-                             const std::string& file );
 
 #endif

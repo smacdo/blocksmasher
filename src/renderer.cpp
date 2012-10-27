@@ -38,16 +38,21 @@ void Renderer::clear()
     SDL_RenderClear( mpRenderer );
 }
 
-void Renderer::draw( Sprite * pSprite )
+void Renderer::draw( const Sprite* pSprite, const Vector2& position )
 {
-    assert( pSprite != NULL );
+    assert( pSprite != NULL && "There is no way I can render a null sprite" );
 
-    // Get the dimensions of the sprite we are trying to draw and generate
-    // the correct SDL rectangle describing where we should draw the sprite
-    // on the screen.
-    Vector2 position = pSprite->position();
+    // Get the dimensions of the sprite we are trying to draw, and generate
+    // the correct rectangle describing it's offset and size in it's source
+    // sprite sheet
     Vector2 size = pSprite->size();
+    SDL_Rect sourceRect = { 0,
+                            0,
+                            static_cast<int>( size.x() ),
+                            static_cast<int>( size.y() ) };
 
+    // Also calculate a rectangle into which we will draw the texture on the
+    // screen
     SDL_Rect targetRect = { static_cast<int>( position.x() ), 
                             static_cast<int>( position.y() ),
                             static_cast<int>( size.x() ),
@@ -56,9 +61,10 @@ void Renderer::draw( Sprite * pSprite )
     // Get a copy of the SDL_Texture, and cast away its const-ness
     //  (since SDL doesn't support const)
     SDL_Texture *pTexture = const_cast<SDL_Texture*>( pSprite->getTexture() );
+    assert( pTexture != NULL && "Really? Seriously? A null texture?" );
 
     // Now draw the sprite
-    SDL_RenderCopy( mpRenderer, pTexture, NULL, &targetRect );
+    SDL_RenderCopy( mpRenderer, pTexture, &sourceRect, &targetRect );
 }
 
 void Renderer::present()

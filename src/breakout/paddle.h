@@ -1,5 +1,5 @@
 /*
- * breakoutscreen.h
+ * paddle.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,31 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_BREAKOUT_BREAKOUTSCREEN_H
-#define SCOTT_BREAKOUT_BREAKOUTSCREEN_H
-
-#include "basescreen.h"
-
-class Ball;
-class Renderer;
-struct GameAppContext;
+#ifndef SCOTT_BREAKOUT_PADDLE_H
+#define SCOTT_BREAKOUT_PADDLE_H
 
 /**
- * Main game play implementation of breakout
+ * Represents a player paddle game object. The player can move this paddle
+ * and uses it to bounce balls around the scene.
  */
-class BreakoutScreen : public BaseScreen
+class Paddle
 {
 public:
-    BreakoutScreen();
-    virtual ~BreakoutScreen();
-
-    void startup( GameAppContext& context );     // TODO: Pull this out
-    void shutdown();
-    void update();
-    void render( Renderer& renderer );
 
 private:
-    Ball * mpBall;
 };
 
 #endif

@@ -17,30 +17,15 @@
 #include "sprite.h"
 #include "utils.h"
 #include "math/vector2.h"
-#include "config.h"        // for window width/height
 
 #include <SDL.h>
 #include <string>
 #include <iostream>
 
-Sprite::Sprite( SDL_Texture *pTexture,
-                const Vector2& size,
-                const Vector2& position )
+Sprite::Sprite( SDL_Texture *pTexture, const Vector2& size )
     : mpTexture( pTexture ),
-      mSize( size ),
-      mPosition( position ),
-      mVelocity()
-{
-}
-
-Sprite::Sprite( SDL_Texture *pTexture,
-                const Vector2& size,
-                const Vector2& position,
-                const Vector2& velocity )
-    : mpTexture( pTexture ),
-      mSize( size ),
-      mPosition( position ),
-      mVelocity( velocity )
+      mOriginalSize( size ),
+      mSize( size )
 {
 }
 
@@ -54,62 +39,25 @@ const SDL_Texture * Sprite::getTexture() const
     return mpTexture;
 }
 
-float Sprite::width() const
-{
-    return mSize.x();
-}
-
-float Sprite::height() const
-{
-    return mSize.y();
-}
-
-Vector2 Sprite::position() const
-{
-    return mPosition;
-}
-
+/**
+ * Get the size of the sprite
+ */
 Vector2 Sprite::size() const
 {
-    return mSize;   
-}
-
-void Sprite::setPosition( const Vector2& position )
-{
-    mPosition = position;
-}
-
-Vector2 Sprite::velocity() const
-{
-    return mVelocity;
-}
-
-void Sprite::setVelocity( const Vector2& velocity )
-{
-    mVelocity = velocity;
+    return mSize;
 }
 
 /**
- * Update the sprite according to the time step
+ * Set the size of the sprite. Cannot be larger than the source image
  */
-void Sprite::update()
+void Sprite::setSize( const Vector2& newSize )
 {
-    // Update our position according to velocity
-    mPosition += mVelocity;
+    assert( newSize.x() <= mOriginalSize.x() );
+    assert( newSize.y() <= mOriginalSize.y() );
 
-    std::cout << mPosition << std::endl;
-
-    // Reverse velocity once we hit a wall
-    float x = mPosition.x();
-    float y = mPosition.y();
-
-    if ( x < 0.0f || x >= ( DEFAULT_WINDOW_WIDTH - width() ) )
+    if ( newSize.x() <= mOriginalSize.x() && 
+         newSize.y() <= mOriginalSize.y() )
     {
-        mVelocity *= Vector2( -1.0f, 1.0f );
-    }
-
-    if ( y < 0.0f || y >= ( DEFAULT_WINDOW_HEIGHT - height() ) )
-    {
-        mVelocity *= Vector2( 1.0f, -1.0f );
+        mSize = newSize;
     }
 }

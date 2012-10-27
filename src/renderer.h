@@ -19,6 +19,7 @@
 
 struct SDL_Renderer;
 class Sprite;
+class Vector2;
 
 class Renderer
 {
@@ -27,7 +28,7 @@ public:
     ~Renderer();
 
     void clear();
-    void draw( Sprite * pSprite );
+    void draw( const Sprite* pSprite, const Vector2& position );
     void present();
 
 private:

@@ -52,5 +52,5 @@ Sprite * LoadSpriteFromFile( SDL_Renderer *pRenderer,
     SDL_FreeSurface( pSurface );
 
     // Create a sprite to hold the texture, and return it to the caller
-    return new Sprite( pTexture, size, Vector2::ZERO );
+    return new Sprite( pTexture, size );
 }

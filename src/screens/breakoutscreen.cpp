@@ -15,12 +15,16 @@
  * limitations under the License.
  */
 #include "screens/breakoutscreen.h"
-#include "sprite.h"
+#include "breakout/ball.h"
 #include "renderer.h"
+#include "sprite.h"
 #include "gameappcontext.h"
 
+#include <cassert>
+
 BreakoutScreen::BreakoutScreen()
-    : BaseScreen()
+    : BaseScreen(),
+      mpBall( NULL )
 {
 
 }
@@ -32,22 +36,23 @@ BreakoutScreen::~BreakoutScreen()
 
 void BreakoutScreen::update()
 {
-    assert( mpSprite != NULL && "How on earth is this null?" );
-    mpSprite->update();
+    assert( mpBall != NULL && "How on earth is this null?" );
+    mpBall->update();
 }
 
 void BreakoutScreen::render( Renderer& renderer )
 {
-    renderer.draw( mpSprite );
+    renderer.draw( mpBall->sprite(), mpBall->position() );
 }
 
 void BreakoutScreen::startup( GameAppContext& context )
 {
-    mpSprite = LoadSpriteFromFile( context.pRenderer, "sample.bmp" );
-    mpSprite->setVelocity( Vector2( 0.2f, 0.1f ) );
+    // Create the initial ball object
+    Sprite * pBallSprite = LoadSpriteFromFile( context.pRenderer, "sample.bmp" );
+    mpBall = new Ball( pBallSprite, Vector2( 0, 0 ), Vector2( 2.5f, 2.5f ) );
 }
 
 void BreakoutScreen::shutdown()
 {
-    delete mpSprite;
+    delete mpBall;
 }

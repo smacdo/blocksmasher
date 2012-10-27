@@ -13,10 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\scenes">
+    <Filter Include="Header Files\screens">
       <UniqueIdentifier>{a63527b8-76d6-43ab-be8d-0968e9795cc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\scenes">
+    <Filter Include="Source Files\screens">
       <UniqueIdentifier>{af4ff3eb-1517-4823-acdd-997bbdb02db3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -42,16 +42,19 @@
     <ClCompile Include="src\gameappcontext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gamescene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\basegameapp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenes\breakoutlevelscene.cpp">
-      <Filter>Source Files\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="src\gametime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameapp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\basescreen.cpp">
+      <Filter>Source Files\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\screens\breakoutscreen.cpp">
+      <Filter>Source Files\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\breakout\ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,13 +80,19 @@
     <ClInclude Include="src\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\basegameapp.h">
+    <ClInclude Include="src\gameapp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenes\breakoutlevelscene.h">
-      <Filter>Header Files\scenes</Filter>
+    <ClInclude Include="src\screens\breakoutscreen.h">
+      <Filter>Header Files\screens</Filter>
     </ClInclude>
-    <ClInclude Include="src\gametime.h">
+    <ClInclude Include="src\basescreen.h">
+      <Filter>Header Files\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="src\breakout\paddle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\breakout\ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
