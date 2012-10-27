@@ -1,5 +1,5 @@
 /*
- * breakoutlevelscene.cpp
+ * breakoutscreen.cpp
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,40 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "scenes/breakoutlevelscene.h"
+#include "screens/breakoutscreen.h"
 #include "sprite.h"
 #include "renderer.h"
 #include "gameappcontext.h"
 
-BreakoutLevelScene::BreakoutLevelScene()
-    : BaseGameScene()
+BreakoutScreen::BreakoutScreen()
+    : BaseScreen()
 {
 
 }
 
-BreakoutLevelScene::~BreakoutLevelScene()
+BreakoutScreen::~BreakoutScreen()
 {
 
 }
 
-void BreakoutLevelScene::update()
+void BreakoutScreen::update()
 {
     assert( mpSprite != NULL && "How on earth is this null?" );
     mpSprite->update();
 }
 
-void BreakoutLevelScene::render( Renderer& renderer )
+void BreakoutScreen::render( Renderer& renderer )
 {
     renderer.draw( mpSprite );
 }
 
-void BreakoutLevelScene::startup( GameAppContext& context )
+void BreakoutScreen::startup( GameAppContext& context )
 {
     mpSprite = LoadSpriteFromFile( context.pRenderer, "sample.bmp" );
     mpSprite->setVelocity( Vector2( 0.2f, 0.1f ) );
 }
 
-void BreakoutLevelScene::shutdown()
+void BreakoutScreen::shutdown()
 {
     delete mpSprite;
 }

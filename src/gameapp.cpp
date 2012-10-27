@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "basegameapp.h"
+#include "gameapp.h"
 #include "utils.h"
 #include "renderer.h"
-#include "gamescene.h"
+#include "basescreen.h"
 #include "gametime.h"
 
 #include <SDL.h>
@@ -52,16 +52,16 @@ GameApp::~GameApp()
 /**
  * Runs the game to completion
  */
-void GameApp::run( BaseGameScene * pGameScene )
+void GameApp::run( BaseScreen * pGameScreen )
 {
     // First start the game up! (Otherwise we might have some issues)
     startup();
 
     // Hold on to the game scene, we're going to need during execution
-    assert( pGameScene != NULL && "Cannot run a null game scene" );
-    mpGameScene = pGameScene;
+    assert( pGameScreen != NULL && "Cannot run a null game screen" );
+    mpGameScreen = pGameScreen;
 
-    mpGameScene->startup( mContext );
+    mpGameScreen->startup( mContext );
 
     // Now keep running the game until the player decides to quit
     float timerFreq   = static_cast<float>(SDL_GetPerformanceFrequency());
@@ -123,8 +123,8 @@ void GameApp::doInput( const GameTime& time )
  */
 void GameApp::doUpdate( const GameTime& time )
 {
-    assert( mpGameScene != NULL && "How on earth did you become null?" );
-    mpGameScene->update();
+    assert( mpGameScreen != NULL && "How on earth did you become null?" );
+    mpGameScreen->update();
 }
 
 /**
@@ -133,12 +133,12 @@ void GameApp::doUpdate( const GameTime& time )
 void GameApp::doRender( const GameTime& time )
 {
     assert( mpRenderer != NULL && "Kinda hard to render when it's null..." );
-    assert( mpGameScene != NULL && "Cannot render a null game scene" );
+    assert( mpGameScreen != NULL && "Cannot render a null game screen" );
 
     // Clear the screen before letting the active game scene take a crack at
     // drawing
     mpRenderer->clear();
-    mpGameScene->render( *mpRenderer );
+    mpGameScreen->render( *mpRenderer );
 
     // Go go drawing
     mpRenderer->present();
@@ -229,8 +229,8 @@ void GameApp::shutdown()
     assert( !mWasShutdown && "Cannot shutdown more than once" );
 
     // Destroy the active game scene
-    mpGameScene->shutdown();
-    delete mpGameScene;
+    mpGameScreen->shutdown();
+    delete mpGameScreen;
 
     // Destroy the game renderer
     delete mpRenderer;

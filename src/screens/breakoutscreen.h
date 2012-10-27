@@ -1,5 +1,5 @@
 /*
- * gamescene.h
+ * breakoutscreen.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,28 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_GAMESCENE_H
-#define SCOTT_SIMPLEGL_GAMESCENE_H
+#ifndef SCOTT_SIMPLEGL_BREAKOUTSCREEN_H
+#define SCOTT_SIMPLEGL_BREAKOUTSCREEN_H
 
-struct GameAppContext;
+#include "basescreen.h"
+
+class Sprite;
 class Renderer;
+struct GameAppContext;
 
 /**
- * Base class for all game play related code
+ * Main game play implementation of breakout
  */
-class BaseGameScene
+class BreakoutScreen : public BaseScreen
 {
 public:
-    BaseGameScene();
-    virtual ~BaseGameScene();
+    BreakoutScreen();
+    virtual ~BreakoutScreen();
 
-    virtual void startup( GameAppContext& context ) = 0; // TODO: Pull this out
-    virtual void shutdown() = 0;
-    virtual void update() = 0;
-    virtual void render( Renderer& renderer ) = 0;
+    void startup( GameAppContext& context );     // TODO: Pull this out
+    void shutdown();
+    void update();
+    void render( Renderer& renderer );
 
 private:
-
+    Sprite * mpSprite;
 };
 
 #endif

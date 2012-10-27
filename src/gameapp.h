@@ -1,5 +1,5 @@
 /*
- * breakoutlevelscene.h
+ * gameapp.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,31 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_BREAKOUTLEVELSCENE_H
-#define SCOTT_SIMPLEGL_BREAKOUTLEVELSCENE_H
+#ifndef SCOTT_SIMPLEGL_GAMEAPP_H
+#define SCOTT_SIMPLEGL_GAMEAPP_H
 
-#include "gamescene.h"
+#include <vector>
+#include <string>
+#include "gameappcontext.h"
 
-class Sprite;
 class Renderer;
-struct GameAppContext;
+class BaseScreen;
+class GameTime;
 
-/**
- * Main game play implementation of breakout
- */
-class BreakoutLevelScene : public BaseGameScene
+class GameApp
 {
 public:
-    BreakoutLevelScene();
-    virtual ~BreakoutLevelScene();
+    GameApp( int argc, char ** argv );
+    ~GameApp();
 
-    void startup( GameAppContext& context );     // TODO: Pull this out
-    void shutdown();
-    void update();
-    void render( Renderer& renderer );
+    void run( BaseScreen * pScreen );
+    void tick( const GameTime& time );
+    void doInput( const GameTime& time );
+    void doUpdate( const GameTime& time );
+    void doRender( const GameTime& time );
 
 private:
-    Sprite * mpSprite;
+    void startup();
+    void shutdown();
+
+private:
+    std::vector<std::string> mCommandLineArguments;
+    GameAppContext mContext;
+    Renderer * mpRenderer;
+    BaseScreen * mpGameScreen;
+    bool mWasShutdown;
 };
 
 #endif

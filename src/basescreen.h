@@ -1,5 +1,5 @@
 /*
- * gamescene.cpp
+ * gamescene.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "gamescene.h"
+#ifndef SCOTT_SIMPLEGL_BASESCREEN_H
+#define SCOTT_SIMPLEGL_CASESCREEN_H
 
-BaseGameScene::BaseGameScene()
+struct GameAppContext;
+class Renderer;
+
+/**
+ * Base class for all game play related code
+ */
+class BaseScreen
 {
+public:
+    BaseScreen();
+    virtual ~BaseScreen();
 
-}
+    virtual void startup( GameAppContext& context ) = 0; // TODO: Pull this out
+    virtual void shutdown() = 0;
+    virtual void update() = 0;
+    virtual void render( Renderer& renderer ) = 0;
 
-BaseGameScene::~BaseGameScene()
-{
+private:
 
-}
+};
+
+#endif
