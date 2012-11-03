@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_UTILS_H
-#define SCOTT_SIMPLEGL_UTILS_H
+#ifndef SCOTT_BREAKOUT_UTILS_H
+#define SCOTT_BREAKOUT_UTILS_H
 
 #include <string>
+#include <boost/checked_delete.hpp>
 
 enum EErrorType
 {
@@ -27,5 +28,15 @@ enum EErrorType
 };
 
 void raiseError( const std::string& error, EErrorType type = EERROR_APP );
+
+/**
+ * Safely delete a pointer and set it to null
+ */
+template<typename T>
+void Delete( T*& pointer )
+{
+    boost::checked_delete( pointer );
+    pointer = NULL;
+}
 
 #endif

@@ -13,10 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\screens">
+    <Filter Include="Header Files\breakout">
       <UniqueIdentifier>{a63527b8-76d6-43ab-be8d-0968e9795cc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\screens">
+    <Filter Include="Source Files\breakout">
       <UniqueIdentifier>{af4ff3eb-1517-4823-acdd-997bbdb02db3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -48,14 +48,20 @@
     <ClCompile Include="src\gameapp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\basescreen.cpp">
-      <Filter>Source Files\screens</Filter>
-    </ClCompile>
     <ClCompile Include="src\screens\breakoutscreen.cpp">
-      <Filter>Source Files\screens</Filter>
+      <Filter>Source Files\breakout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameobject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\basescreen.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\breakout\ball.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\breakout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\breakout\paddle.cpp">
+      <Filter>Source Files\breakout</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,16 +90,19 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\screens\breakoutscreen.h">
-      <Filter>Header Files\screens</Filter>
+      <Filter>Header Files\breakout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameobject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\basescreen.h">
-      <Filter>Header Files\screens</Filter>
-    </ClInclude>
-    <ClInclude Include="src\breakout\paddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\breakout\ball.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\breakout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\breakout\paddle.h">
+      <Filter>Header Files\breakout</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

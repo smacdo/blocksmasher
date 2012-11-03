@@ -1,5 +1,5 @@
 /*
- * ball.h
+ * paddle.cpp
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_BREAKOUT_BALL_H
-#define SCOTT_BREAKOUT_BALL_H
+#include "paddle.h"
+#include "sprite.h"
+#include "math/vector2.h"
+#include "config.h"        // for window width/height
 
-#include "gameobject.h"
-
-class Sprite;
-class Vector2;
+#include <cassert>
+#include <iostream>
 
 /**
- * A ball that bounces around the game screen according to pseudo physics
+ * Ball constructor
  */
-class Ball : public GameObject
+Paddle::Paddle( Sprite * pSprite,
+                const Vector2& centerPosition,
+                float paddleWidth )
+    : GameObject( pSprite, Vector2( paddleWidth, 32.0f ), centerPosition ),
+      mPaddleWidth( paddleWidth )
 {
-public:
-    Ball( Sprite * pSprite,
-          const Vector2& position,
-          const Vector2& veloicty );
-    virtual ~Ball();
-};
+    // Set the position correctly
+    mPosition -= Vector2( paddleWidth / 2.0f, height() );
+}
 
-#endif
+/**
+ * Destructor
+ */
+Paddle::~Paddle()
+{
+}

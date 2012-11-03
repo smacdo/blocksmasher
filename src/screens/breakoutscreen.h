@@ -21,6 +21,7 @@
 
 class Ball;
 class Renderer;
+class Paddle;
 struct GameAppContext;
 
 /**
@@ -38,6 +39,7 @@ public:
     void render( Renderer& renderer );
 
 private:
+    Paddle * mpPaddle;
     Ball * mpBall;
 };
 

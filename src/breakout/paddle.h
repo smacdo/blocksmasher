@@ -17,15 +17,25 @@
 #ifndef SCOTT_BREAKOUT_PADDLE_H
 #define SCOTT_BREAKOUT_PADDLE_H
 
+#include "gameobject.h"
+
+class Sprite;
+class Vector2;
+
 /**
  * Represents a player paddle game object. The player can move this paddle
  * and uses it to bounce balls around the scene.
  */
-class Paddle
+class Paddle : public GameObject
 {
 public:
+    Paddle( Sprite * pSprite,
+            const Vector2& centerPosition,
+            float paddleWidth );
+    virtual ~Paddle();
 
 private:
+    float mPaddleWidth;
 };
 
 #endif
