@@ -104,5 +104,8 @@
     <ClInclude Include="src\breakout\paddle.h">
       <Filter>Header Files\breakout</Filter>
     </ClInclude>
+    <ClInclude Include="src\gametime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

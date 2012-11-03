@@ -46,11 +46,11 @@ BreakoutScreen::~BreakoutScreen()
 /**
  * Update all objects
  */
-void BreakoutScreen::update()
+void BreakoutScreen::update( const GameTime& gameTime )
 {
     assert( mpBall != NULL && "How on earth is this null?" );
-    mpBall->update();
-    mpPaddle->update();
+    mpBall->update( gameTime );
+    mpPaddle->update( gameTime );
 }
 
 /**
@@ -66,7 +66,7 @@ void BreakoutScreen::startup( GameAppContext& context )
 {
     // Create the initial ball object
     Sprite * pBallSprite = LoadSpriteFromFile( context.pRenderer, "sample.bmp" );
-    mpBall = new Ball( pBallSprite, Vector2( 0, 0 ), Vector2( 2.5f, 2.5f ) );
+    mpBall = new Ball( pBallSprite, Vector2::ZERO, Vector2( 75.0f, 75.0f ) );
 
     // Calculate the position of the player's paddle
     float paddleX = DEFAULT_WINDOW_WIDTH / 2.0f;

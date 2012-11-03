@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 #include "gameobject.h"
+#include "gametime.h"
 #include "sprite.h"
 #include "config.h"        // for window width/height
 #include "utils.h"
@@ -134,10 +135,10 @@ void GameObject::setVelocity( const Vector2& velocity )
 /**
  * Update the sprite according to the time step
  */
-void GameObject::update()
+void GameObject::update( const GameTime& gameTime )
 {
     // Update our position according to velocity
-    mPosition += mVelocity;
+    mPosition += (mVelocity * gameTime.deltaTime());
 
     std::cout << mPosition << std::endl;
 

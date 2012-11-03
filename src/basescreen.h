@@ -19,6 +19,7 @@
 
 struct GameAppContext;
 class Renderer;
+class GameTime;
 
 /**
  * Base class for all game play related code
@@ -31,7 +32,7 @@ public:
 
     virtual void startup( GameAppContext& context ) = 0; // TODO: Pull this out
     virtual void shutdown() = 0;
-    virtual void update() = 0;
+    virtual void update( const GameTime& gameTime ) = 0;
     virtual void render( Renderer& renderer ) = 0;
 
 private:

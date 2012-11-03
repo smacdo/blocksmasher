@@ -21,12 +21,12 @@
 class GameTime
 {
 public:
-    GameTime( float currentTime, float deltaTime );
+    GameTime( double currentTime, double deltaTime );
 
-    float currentTime() const;
-    float deltaTime() const;
+    double currentTime() const;
+    double deltaTime() const;
 
 private:
-    float mCurrentTime;
-    float mDeltaTime;
+    double mCurrentTime;
+    double mDeltaTime;
 };

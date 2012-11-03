@@ -22,6 +22,7 @@
 class Ball;
 class Renderer;
 class Paddle;
+class GameTime;
 struct GameAppContext;
 
 /**
@@ -35,7 +36,7 @@ public:
 
     void startup( GameAppContext& context );     // TODO: Pull this out
     void shutdown();
-    void update();
+    void update( const GameTime& gameTime );
     void render( Renderer& renderer );
 
 private:

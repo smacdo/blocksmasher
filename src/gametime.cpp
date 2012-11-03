@@ -16,18 +16,18 @@
  */
 #include "gametime.h"
 
-GameTime::GameTime( float currentTime, float deltaTime )
+GameTime::GameTime( double currentTime, double deltaTime )
     : mCurrentTime( currentTime ),
       mDeltaTime( deltaTime )
 {
 }
 
-float GameTime::currentTime() const
+double GameTime::currentTime() const
 {
     return mCurrentTime;
 }
 
-float GameTime::deltaTime() const
+double GameTime::deltaTime() const
 {
     return mDeltaTime;
 }

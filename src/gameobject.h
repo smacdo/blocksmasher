@@ -20,6 +20,7 @@
 #include "math/vector2.h"
 
 class Sprite;
+class GameTime;
 
 /**
  * Represents an abstract concept of a game object. Encapsulates position,
@@ -46,7 +47,7 @@ public:
     Vector2 velocity() const;
     void setVelocity( const Vector2& velocity );
 
-    void update();
+    void update( const GameTime& gameTime );
 
     // Get the size (width and height) of the sprite
     Vector2 size() const;
