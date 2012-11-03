@@ -64,22 +64,23 @@ void GameApp::run( BaseScreen * pGameScreen )
     mpGameScreen->startup( mContext );
 
     // Now keep running the game until the player decides to quit
-    double timerFreq   = static_cast<double>(SDL_GetPerformanceFrequency());
-    double lastTime    = static_cast<double>( SDL_GetPerformanceCounter() ) / timerFreq;
-    double nowTime     = static_cast<double>( SDL_GetPerformanceCounter() ) / timerFreq;
-    double elapsedTime = 0.0f;
-    double gameTime    = 0.0f;
+    uint64_t timerFreq = SDL_GetPerformanceFrequency();
+    uint64_t startTime = SDL_GetPerformanceCounter();
+    uint64_t lastTime  = startTime;
+    uint64_t nowTime   = startTime;
+    float elapsedTime  = 0.0;
+    float gameTime     = 0.0;
 
-
+    // Game loop
     while ( !mContext.isQuiting )
     {
         // Calculate the amount of time that has passed
-        nowTime      = static_cast<double>(SDL_GetPerformanceCounter()) /
-                       static_cast<double>(SDL_GetPerformanceFrequency());
-        elapsedTime  = nowTime - lastTime;
-        gameTime    += elapsedTime;
+        nowTime      = SDL_GetPerformanceCounter();
+        timerFreq    = SDL_GetPerformanceFrequency();
 
-        SDL_Log( "elapsed: %f - %f = %f\n", nowTime, lastTime, elapsedTime );
+        elapsedTime  = static_cast<float>(nowTime - lastTime) /
+                       static_cast<float>(timerFreq);
+        gameTime    += elapsedTime;
 
         // Update the simulation
         tick( GameTime( gameTime, elapsedTime ) );
