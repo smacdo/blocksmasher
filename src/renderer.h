@@ -14,12 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_RENDERER_H
-#define SCOTT_SIMPLEGL_RENDERER_H
+#ifndef SCOTT_HAILSTORM_RENDERER_H
+#define SCOTT_HAILSTORM_RENDERER_H
+
+#include <string>
+#include <map>
 
 struct SDL_Renderer;
+struct SDL_Texture;
+class GameTime;
 class Sprite;
 class Vector2;
+
+typedef std::map< std::string, SDL_Texture* > texture_cache_t;
 
 class Renderer
 {
@@ -27,12 +34,16 @@ public:
     Renderer( SDL_Renderer *pRenderer );
     ~Renderer();
 
+    Sprite * createSprite( const std::string& imagePath );
+
+    void update( const GameTime& time );
     void clear();
     void draw( const Sprite* pSprite, const Vector2& position );
     void present();
 
 private:
     SDL_Renderer * mpRenderer;
+    texture_cache_t mCachedTextures;
 };
 
 #endif

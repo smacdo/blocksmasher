@@ -36,42 +36,25 @@ ResourcesLoader::~ResourcesLoader()
 }
 
 /**
- * Loads a sprite from disk
+ * Loads a SDL_Surface from an image stored on disk.
+ *  TODO: Don't use SDL to load the image... just load it as a raw blob and
+ *        return it.
  *
  * \param  pRenderer  Pointer to a valid SDL renderer
  * \param  file       The sprite's file path
- * \return            Instance representing the sprite, or NULL if it failed
+ * \return            Loaded SDL_Surface, or NULL if it fails
  */
-Sprite * ResourcesLoader::loadSprite( SDL_Renderer *pRenderer,
-                                      const std::string& file )
+SDL_Surface * ResourcesLoader::loadSurface( const std::string& imagePath,
+                                            SDL_Renderer * pRenderer )
 {
     // Load the texture image from a file
-    SDL_Surface *pSurface = SDL_LoadBMP( file.c_str() );
+    SDL_Surface *pSurface = SDL_LoadBMP( imagePath.c_str() );
 
     // Make sure the file loaded
     if ( pSurface == NULL )
     {
-        raiseError( "Failed to open texture file", EERROR_SDL );
+        raiseError( "Failed to load image file", EERROR_SDL );
     }
 
-    // Convert the SDL surface into a texture
-    SDL_Texture * pTexture = SDL_CreateTextureFromSurface( pRenderer,
-        pSurface );
-
-    if ( pTexture == NULL )
-    {
-        raiseError( "Failed to create SDL texture from image", EERROR_SDL );
-    }
-
-    // Query the dimensions of the image before destroying the SDL surface
-    //  (Since we already copied it into an SDL texture)
-    float width  = static_cast<float>( pSurface->w );
-    float height = static_cast<float>( pSurface->h );
-
-    Vector2 size = Vector2( width, height );
-
-    SDL_FreeSurface( pSurface );
-
-    // Create a sprite to hold the texture, and return it to the caller
-    return new Sprite( pTexture, size );
+    return pSurface;
 }

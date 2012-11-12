@@ -18,6 +18,7 @@
 #define SCOTT_HAILSTORM_RESOURCESLOADER_H
 
 class Sprite;
+struct SDL_Surface;
 struct SDL_Renderer;
 
 #include <string>
@@ -31,7 +32,7 @@ public:
     ResourcesLoader();
     ~ResourcesLoader();
 
-    Sprite * loadSprite( SDL_Renderer *pRenderer, const std::string& file );
+    SDL_Surface * loadSurface( const std::string& imagePath, SDL_Renderer *pRenderer );
 
 private:
 };
