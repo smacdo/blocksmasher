@@ -19,6 +19,8 @@
 #include "renderer.h"
 #include "basescreen.h"
 #include "gametime.h"
+#include "resourcesloader.h"
+#include "application.h"
 
 #include <SDL.h>
 #include <string>
@@ -136,16 +138,16 @@ void GameApp::doUpdate( const GameTime& time )
  */
 void GameApp::doRender( const GameTime& time )
 {
-    assert( mpRenderer != NULL && "Kinda hard to render when it's null..." );
     assert( mpGameScreen != NULL && "Cannot render a null game screen" );
 
     // Clear the screen before letting the active game scene take a crack at
     // drawing
-    mpRenderer->clear();
-    mpGameScreen->render( *mpRenderer );
+    Renderer& renderer = Application::renderer();
 
-    // Go go drawing
-    mpRenderer->present();
+    renderer.clear();
+    mpGameScreen->render( renderer );
+
+    renderer.present();
 }
 
 /**
@@ -218,8 +220,13 @@ void GameApp::startup()
                     EERROR_SDL );
     }
 
-    // Set up our renderer
-    mpRenderer = new Renderer( mContext.pRenderer );
+    // Set up our subsystems
+    ResourcesLoader * pLoader = new ResourcesLoader();
+    Application::instance().setResourcesLoader( pLoader );
+
+    Renderer * pRenderer = new Renderer( mContext.pRenderer );
+    Application::instance().setRenderer( pRenderer );
+
 
     // So what happened?
     SDL_Log( "Using %s video driver\n", SDL_GetCurrentVideoDriver() );
@@ -236,9 +243,11 @@ void GameApp::shutdown()
     mpGameScreen->shutdown();
     delete mpGameScreen;
 
-    // Destroy the game renderer
-    delete mpRenderer;
+    // Destroy our subsystems
+    Application::instance().setRenderer( NULL );
+    Application::instance().setResourcesLoader( NULL );
 
+    // Now unload our OpenGL context
     if ( mContext.glContext )
     {
         SDL_GL_DeleteContext( mContext.glContext );

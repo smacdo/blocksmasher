@@ -15,14 +15,35 @@
  * limitations under the License.
  */
 #include "sprite.h"
+#include "resourcesloader.h"
 #include "utils.h"
 #include <SDL.h>
 
 /**
- * Loads a sprite from disk
+ * Constructor
  */
-Sprite * LoadSpriteFromFile( SDL_Renderer *pRenderer,
-    const std::string& file )
+ResourcesLoader::ResourcesLoader()
+{
+
+}
+
+/**
+ * Destructor
+ */
+ResourcesLoader::~ResourcesLoader()
+{
+
+}
+
+/**
+ * Loads a sprite from disk
+ *
+ * \param  pRenderer  Pointer to a valid SDL renderer
+ * \param  file       The sprite's file path
+ * \return            Instance representing the sprite, or NULL if it failed
+ */
+Sprite * ResourcesLoader::loadSprite( SDL_Renderer *pRenderer,
+                                      const std::string& file )
 {
     // Load the texture image from a file
     SDL_Surface *pSurface = SDL_LoadBMP( file.c_str() );

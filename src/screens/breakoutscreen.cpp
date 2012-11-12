@@ -19,6 +19,8 @@
 #include "breakout/paddle.h"
 #include "renderer.h"
 #include "sprite.h"
+#include "application.h"
+#include "resourcesloader.h"
 #include "gameappcontext.h"
 #include "config.h"
 
@@ -65,7 +67,9 @@ void BreakoutScreen::render( Renderer& renderer )
 void BreakoutScreen::startup( GameAppContext& context )
 {
     // Create the initial ball object
-    Sprite * pBallSprite = LoadSpriteFromFile( context.pRenderer, "sample.bmp" );
+    ResourcesLoader& resources = Application::resources();
+
+    Sprite * pBallSprite = resources.loadSprite( context.pRenderer, "sample.bmp" );
     mpBall = new Ball( pBallSprite, Vector2::ZERO, Vector2( 75.0f, 75.0f ) );
 
     // Calculate the position of the player's paddle
@@ -73,7 +77,7 @@ void BreakoutScreen::startup( GameAppContext& context )
     float paddleY = DEFAULT_WINDOW_HEIGHT - 24.0f;
 
     // Create the player's paddle object
-    Sprite * pPaddleSprite = LoadSpriteFromFile( context.pRenderer, "sample.bmp" );
+    Sprite * pPaddleSprite = resources.loadSprite( context.pRenderer, "sample.bmp" );
     mpPaddle = new Paddle( pPaddleSprite,
                            Vector2( paddleX, paddleY ),
                            300.0f );

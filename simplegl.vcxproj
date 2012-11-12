@@ -174,6 +174,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\breakout\ball.cpp" />
     <ClCompile Include="src\breakout\paddle.cpp" />
     <ClCompile Include="src\gameapp.cpp" />
@@ -186,10 +187,11 @@
     <ClCompile Include="src\screens\breakoutscreen.cpp" />
     <ClCompile Include="src\simplegl.cpp" />
     <ClCompile Include="src\sprite.cpp" />
-    <ClCompile Include="src\spriteloader.cpp" />
+    <ClCompile Include="src\resourcesloader.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\application.h" />
     <ClInclude Include="src\breakout\ball.h" />
     <ClInclude Include="src\breakout\paddle.h" />
     <ClInclude Include="src\config.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="src\gametime.h" />
     <ClInclude Include="src\math\vector2.h" />
     <ClInclude Include="src\renderer.h" />
+    <ClInclude Include="src\resourcesloader.h" />
     <ClInclude Include="src\screens\breakoutscreen.h" />
     <ClInclude Include="src\simplegl.h" />
     <ClInclude Include="src\sprite.h" />

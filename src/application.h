@@ -1,5 +1,5 @@
 /*
- * sprite.h
+ * application.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,33 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_SPRITE_H
-#define SCOTT_SIMPLEGL_SPRITE_H
+#ifndef SCOTT_HAILSTORM_APPLICATION_H
+#define SCOTT_HAILSTORM_APPLICATION_H
 
-#include <string>
-#include "math/vector2.h"
+class ResourcesLoader;
+class Renderer;
 
-struct SDL_Texture;
-struct SDL_Renderer;
-
-/**
- * Represents a 2d graphical sprite that can be drawn on the screen
- */
-class Sprite
+class Application
 {
 public:
-    Sprite( SDL_Texture * pTexture, const Vector2& size );
-    ~Sprite();
+    Application();
+    ~Application();
 
-    const SDL_Texture * getTexture() const;
+    void unload();
 
-    void setSize( const Vector2& newSize );
-    Vector2 size() const;
+    static Application& instance();
+    static ResourcesLoader& resources();
+    static Renderer& renderer();
+
+    void setResourcesLoader( ResourcesLoader * pResourcesLoader );
+    void setRenderer( Renderer * pRenderer );
 
 private:
-    SDL_Texture * mpTexture;
-    Vector2 mOriginalSize;
-    Vector2 mSize;
+    ResourcesLoader * mpResourcesLoader;
+    Renderer * mpRenderer;
 };
 
 #endif

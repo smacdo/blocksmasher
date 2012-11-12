@@ -1,5 +1,5 @@
 /*
- * sprite.h
+ * resourcesloader.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,33 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_SPRITE_H
-#define SCOTT_SIMPLEGL_SPRITE_H
+#ifndef SCOTT_HAILSTORM_RESOURCESLOADER_H
+#define SCOTT_HAILSTORM_RESOURCESLOADER_H
 
-#include <string>
-#include "math/vector2.h"
-
-struct SDL_Texture;
+class Sprite;
 struct SDL_Renderer;
 
+#include <string>
+
 /**
- * Represents a 2d graphical sprite that can be drawn on the screen
+ * Loads resources from disk based storage and returns them as usable resources.
  */
-class Sprite
+class ResourcesLoader
 {
 public:
-    Sprite( SDL_Texture * pTexture, const Vector2& size );
-    ~Sprite();
+    ResourcesLoader();
+    ~ResourcesLoader();
 
-    const SDL_Texture * getTexture() const;
-
-    void setSize( const Vector2& newSize );
-    Vector2 size() const;
+    Sprite * loadSprite( SDL_Renderer *pRenderer, const std::string& file );
 
 private:
-    SDL_Texture * mpTexture;
-    Vector2 mOriginalSize;
-    Vector2 mSize;
 };
 
 #endif

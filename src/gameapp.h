@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_GAMEAPP_H
-#define SCOTT_SIMPLEGL_GAMEAPP_H
+#ifndef SCOTT_BREAKOUT_GAME_APPLICATION_H
+#define SCOTT_BREAKOUT_GAME_APPLICATION_H
 
 #include <vector>
 #include <string>
@@ -44,7 +44,6 @@ private:
 private:
     std::vector<std::string> mCommandLineArguments;
     GameAppContext mContext;
-    Renderer * mpRenderer;
     BaseScreen * mpGameScreen;
     bool mWasShutdown;
 };
