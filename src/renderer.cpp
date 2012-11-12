@@ -92,7 +92,7 @@ Sprite * Renderer::createSprite( const std::string& imagePath )
     }
 
     // Make sure the SDL_Texture was actually loaded and constructed.
-    //  TODO: Create a callback here when the texture object is not correctly
+    //  TODO: Create a fallback here when the texture object is not correctly
     //        constructed
     assert( pTexture != NULL && "Was not able to create a SDL_Texture representing the image" );
 
