@@ -1,0 +1,4 @@
+background_clouds.png
+Author: bart
+License: CC-BY 3.0, CC-BY-SA 3.0, GPL 3, GPL 2
+http://opengameart.org/content/sky-backdrop
