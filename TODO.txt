@@ -1,0 +1,23 @@
+List of things to do:
+
+ - input
+ - move the player paddle
+ - add multiple bricks to the game level
+ - collision detection between paddle and ball
+ - collision response for the ball
+ - subtract lives when the ball goes through the floor
+ - keep track of the game score and display it
+ - keep track of the game time and display it
+ - lose the game after three ball are lost
+ - load a level from disk
+ - add better artwork to the game
+ - add a main menu to the game
+ - add multiple levels to the game
+ - save player score
+ - save player history
+ - serialize current game state to disk
+ - create an installer for the game
+ - port to linux
+ - port to android
+ - port to mac
+ - port to iOS

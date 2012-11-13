@@ -1,5 +1,5 @@
 /*
- * simplegl.cpp
+ * forge.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#ifndef SCOTT_FORGE_H
+#define SCOTT_FORGE_H
 
-#include "simplegl.h"
-#include "gameapp.h"
-#include "screens/breakoutscreen.h"
-
-#include <SDL.h>
-#include <SDL_opengl.h>
-
-/**
- * Application entry point
- */
-int main( int argc, char **argv )
-{
-    // Run the game
-    GameApp game( argc, argv );
-    game.run( new BreakoutScreen );
-    
-    return 0;
-}
+#endif

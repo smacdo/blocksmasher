@@ -21,6 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4B5F8487-4BD1-4B0A-8DB7-10DD6ED0A2F6}</ProjectGuid>
     <RootNamespace>simplegl</RootNamespace>
+    <ProjectName>blocksmasher</ProjectName>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <PostBuildEvent>
@@ -184,8 +185,8 @@
     <ClCompile Include="src\gametime.cpp" />
     <ClCompile Include="src\math\vector.cpp" />
     <ClCompile Include="src\renderer.cpp" />
-    <ClCompile Include="src\screens\breakoutscreen.cpp" />
-    <ClCompile Include="src\simplegl.cpp" />
+    <ClCompile Include="src\screens\blocksmasherscreen.cpp" />
+    <ClCompile Include="src\forge.cpp" />
     <ClCompile Include="src\sprite.cpp" />
     <ClCompile Include="src\resourcesloader.cpp" />
     <ClCompile Include="src\utils.cpp" />
@@ -203,8 +204,8 @@
     <ClInclude Include="src\math\vector2.h" />
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\resourcesloader.h" />
-    <ClInclude Include="src\screens\breakoutscreen.h" />
-    <ClInclude Include="src\simplegl.h" />
+    <ClInclude Include="src\screens\blocksmasherscreen.h" />
+    <ClInclude Include="src\forge.h" />
     <ClInclude Include="src\sprite.h" />
     <ClInclude Include="src\utils.h" />
   </ItemGroup>

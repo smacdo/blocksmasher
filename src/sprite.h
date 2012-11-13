@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_SPRITE_H
-#define SCOTT_SIMPLEGL_SPRITE_H
+#ifndef SCOTT_FORGE_SPRITE_H
+#define SCOTT_FORGE_SPRITE_H
 
 #include <string>
 #include "math/vector2.h"

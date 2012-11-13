@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simplegl", "simplegl.vcxproj", "{4B5F8487-4BD1-4B0A-8DB7-10DD6ED0A2F6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "blocksmasher", "blocksmasher.vcxproj", "{4B5F8487-4BD1-4B0A-8DB7-10DD6ED0A2F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

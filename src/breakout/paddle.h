@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_BREAKOUT_PADDLE_H
-#define SCOTT_BREAKOUT_PADDLE_H
+#ifndef SCOTT_BLOCKSMASHER_PADDLE_H
+#define SCOTT_BLOCKSMASHER_PADDLE_H
 
 #include "gameobject.h"
 

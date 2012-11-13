@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_BREAKOUT_GAME_OBJECT_H
-#define SCOTT_BREAKOUT_GAME_OBJECT_H
+#ifndef SCOTT_FORGE_GAME_OBJECT_H
+#define SCOTT_FORGE_GAME_OBJECT_H
 
 #include "math/vector2.h"
 

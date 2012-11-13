@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_BREAKOUT_UTILS_H
-#define SCOTT_BREAKOUT_UTILS_H
+#ifndef SCOTT_FORGE_UTILS_H
+#define SCOTT_FORGE_UTILS_H
 
 #include <string>
 #include <boost/checked_delete.hpp>

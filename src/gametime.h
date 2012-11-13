@@ -14,6 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#ifndef SCOTT_FORGE_GAMETIME_H
+#define SCOTT_FORGE_GAMETIME_H
 
 /**
  * Keeps track of the game time (in seconds).
@@ -30,3 +32,5 @@ private:
     float mCurrentTime;
     float mDeltaTime;
 };
+
+#endif

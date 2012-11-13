@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_CONFIG_H
-#define SCOTT_SIMPLEGL_CONFIG_H
+#ifndef SCOTT_FORGE_CONFIG_H
+#define SCOTT_FORGE_CONFIG_H
 
-const int DEFAULT_WINDOW_WIDTH = 640;
-const int DEFAULT_WINDOW_HEIGHT = 480;
+const int DEFAULT_WINDOW_WIDTH = 1280;
+const int DEFAULT_WINDOW_HEIGHT = 800;
 
 #endif

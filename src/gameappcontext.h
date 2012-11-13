@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_GAMEAPPCONTEXT_H
-#define SCOTT_SIMPLEGL_GAMEAPPCONTEXT_H
+#ifndef SCOTT_FORGE_GAMEAPPCONTEXT_H
+#define SCOTT_FORGE_GAMEAPPCONTEXT_H
 
 #include <vector>
 #include <string>

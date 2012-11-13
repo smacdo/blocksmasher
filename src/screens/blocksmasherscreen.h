@@ -1,5 +1,5 @@
 /*
- * breakoutscreen.h
+ * blocksmasher.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_BREAKOUT_BREAKOUTSCREEN_H
-#define SCOTT_BREAKOUT_BREAKOUTSCREEN_H
+#ifndef SCOTT_BLOCKSMASHER_BLOCKSMASHERSCREEN_H
+#define SCOTT_BLOCKSMASHER_BLOCKSMASHERSCREEN_H
 
 #include "basescreen.h"
 
@@ -28,11 +28,11 @@ struct GameAppContext;
 /**
  * Main game play implementation of breakout
  */
-class BreakoutScreen : public BaseScreen
+class BlockSmasherScreen : public BaseScreen
 {
 public:
-    BreakoutScreen();
-    virtual ~BreakoutScreen();
+    BlockSmasherScreen();
+    virtual ~BlockSmasherScreen();
 
     void startup( GameAppContext& context );     // TODO: Pull this out
     void shutdown();

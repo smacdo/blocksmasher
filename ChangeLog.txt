@@ -1,0 +1,7 @@
+Mon Nov 12 09:54:00 2012  Scott MacDonald  (scott@whitespaceconsideredharmful.com)
+
+	* Initial release of project
+
+	* Adding distribution documentation
+
+	* Basic development build targets created along with basic game

@@ -1,5 +1,5 @@
 /*
- * gamescene.h
+ * basescreen.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_SIMPLEGL_BASESCREEN_H
-#define SCOTT_SIMPLEGL_CASESCREEN_H
+#ifndef SCOTT_FORGE_BASESCREEN_H
+#define SCOTT_FORGE_BASESCREEN_H
 
 struct GameAppContext;
 class Renderer;

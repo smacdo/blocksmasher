@@ -1,0 +1,14 @@
+*** THIS IS A WORK IN PROGRESS ***
+
+Requirements:
+	1. Visual Studio 2010
+	2. Boost 1.50
+		- Make sure BOOST_ROOT is set
+
+Building from source:
+	1. Open up blocksmasher.sln with Visual Studio 2010
+	2. Click run
+	3. Hope it works
+		3a. Bug Scott when it doesn't work
+
+Your files should show up in game/

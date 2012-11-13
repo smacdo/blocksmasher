@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_HAILSTORM_RESOURCESLOADER_H
-#define SCOTT_HAILSTORM_RESOURCESLOADER_H
+#ifndef SCOTT_FORGE_RESOURCESLOADER_H
+#define SCOTT_FORGE_RESOURCESLOADER_H
 
 class Sprite;
 struct SDL_Surface;

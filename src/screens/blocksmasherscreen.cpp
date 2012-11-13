@@ -1,5 +1,5 @@
 /*
- * breakoutscreen.cpp
+ * blocksmasherscreen.cpp
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "screens/breakoutscreen.h"
+#include "screens/blocksmasherscreen.h"
 #include "breakout/ball.h"
 #include "breakout/paddle.h"
 #include "renderer.h"
@@ -29,7 +29,7 @@
 /**
  * Breakout game screen constructor
  */
-BreakoutScreen::BreakoutScreen()
+BlockSmasherScreen::BlockSmasherScreen()
     : BaseScreen(),
       mpPaddle( NULL ),
       mpBall( NULL )
@@ -40,7 +40,7 @@ BreakoutScreen::BreakoutScreen()
 /**
  * Destructor
  */
-BreakoutScreen::~BreakoutScreen()
+BlockSmasherScreen::~BlockSmasherScreen()
 {
 
 }
@@ -48,7 +48,7 @@ BreakoutScreen::~BreakoutScreen()
 /**
  * Update all objects
  */
-void BreakoutScreen::update( const GameTime& gameTime )
+void BlockSmasherScreen::update( const GameTime& gameTime )
 {
     assert( mpBall != NULL && "How on earth is this null?" );
     mpBall->update( gameTime );
@@ -58,13 +58,13 @@ void BreakoutScreen::update( const GameTime& gameTime )
 /**
  * Draw everything
  */
-void BreakoutScreen::render( Renderer& renderer )
+void BlockSmasherScreen::render( Renderer& renderer )
 {
     renderer.draw( mpBall->sprite(), mpBall->position() );
     renderer.draw( mpPaddle->sprite(), mpPaddle->position() );
 }
 
-void BreakoutScreen::startup( GameAppContext& context )
+void BlockSmasherScreen::startup( GameAppContext& context )
 {
     Renderer& renderer = Application::renderer();
 
@@ -83,7 +83,7 @@ void BreakoutScreen::startup( GameAppContext& context )
                            300.0f );
 }
 
-void BreakoutScreen::shutdown()
+void BlockSmasherScreen::shutdown()
 {
     delete mpBall;
     delete mpPaddle;
