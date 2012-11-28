@@ -23,6 +23,15 @@
 #include <cassert>
 #include <iostream>
 
+GameObject::GameObject()
+    : mpSprite( NULL ),
+      mSize( 0, 0 ),
+      mPosition( 0, 0 ),
+      mVelocity( 0, 0 )
+{
+
+}
+
 /**
  * Game object constructor
  */
@@ -137,22 +146,4 @@ void GameObject::setVelocity( const Vector2& velocity )
  */
 void GameObject::update( const GameTime& gameTime )
 {
-    // Update our position according to velocity
-    mPosition += (mVelocity * gameTime.deltaTime());
-
-    std::cout << mPosition << std::endl;
-
-    // Reverse velocity once we hit a wall
-    float x = mPosition.x();
-    float y = mPosition.y();
-
-    if ( x < 0.0f || x >= ( DEFAULT_WINDOW_WIDTH - width() ) )
-    {
-        mVelocity *= Vector2( -1.0f, 1.0f );
-    }
-
-    if ( y < 0.0f || y >= ( DEFAULT_WINDOW_HEIGHT - height() ) )
-    {
-        mVelocity *= Vector2( 1.0f, -1.0f );
-    }
 }

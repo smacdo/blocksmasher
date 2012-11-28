@@ -130,7 +130,12 @@ void GameApp::doInput( const GameTime& time )
 void GameApp::doUpdate( const GameTime& time )
 {
     assert( mpGameScreen != NULL && "How on earth did you become null?" );
-    mpGameScreen->update( time );
+
+    // Update our processors
+    mContext.pMovementProcessor->update( time );
+
+    // Now let the game screen itself do any needed processing
+    mpGameScreen->update( time, mContext );
 }
 
 /**
@@ -227,6 +232,8 @@ void GameApp::startup()
     Renderer * pRenderer = new Renderer( mContext.pRenderer );
     Application::instance().setRenderer( pRenderer );
 
+    // Set up our processors
+    mContext.pMovementProcessor = new MovementProcessor();
 
     // So what happened?
     SDL_Log( "Using %s video driver\n", SDL_GetCurrentVideoDriver() );
@@ -240,7 +247,7 @@ void GameApp::shutdown()
     assert( !mWasShutdown && "Cannot shutdown more than once" );
 
     // Destroy the active game scene
-    mpGameScreen->shutdown();
+    mpGameScreen->shutdown( mContext );
     delete mpGameScreen;
 
     // Destroy our subsystems

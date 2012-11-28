@@ -1,5 +1,5 @@
 /*
- * gameapp.cpp
+ * gameobjectfactory.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,26 +14,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "gameappcontext.h"
-#include "config.h"
+#ifndef SCOTT_FORGE_GAME_OBJECT_FACTORY_H
+#define SCOTT_FORGE_GAME_OBJECT_FACTORY_H
 
-#include <string>
-#include <vector>
-#include <SDL.h>
+#include <set>
+#include <boost/noncopyable.hpp>
 
-GameAppContext::GameAppContext()
-    : pMovementProcessor( NULL ),
-      pWindow( NULL ),
-      pRenderer( NULL ),
-      glContext( NULL ),
-      isQuiting( false ),
-      display( "NULL", 0, 0, 0 ),
-      window( "SimpleGL Test",
-              SDL_WINDOWPOS_UNDEFINED,
-              SDL_WINDOWPOS_UNDEFINED,
-              DEFAULT_WINDOW_WIDTH,
-              DEFAULT_WINDOW_HEIGHT ),
-      window_count( 1 )
+class GameObject;
+
+/**
+ * Responsible for the creation and destruction of game objects.
+ */
+class GameObjectFactory : boost::noncopyable
 {
+public:
+    GameObjectFactory();
+    ~GameObjectFactory();
 
-}
+    GameObject * create();
+    void destroy( GameObject * object );
+    void update();
+
+private:
+    void processPendingDeletes();
+
+private:
+    std::set<GameObject*> mAliveGameObjects;
+    std::set<GameObject*> mGameObjectsToDestroy;
+};
+
+#endif

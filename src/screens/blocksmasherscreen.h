@@ -35,8 +35,8 @@ public:
     virtual ~BlockSmasherScreen();
 
     void startup( GameAppContext& context );     // TODO: Pull this out
-    void shutdown();
-    void update( const GameTime& gameTime );
+    void shutdown( GameAppContext& context );
+    void update( const GameTime& gameTime, GameAppContext& context );
     void render( Renderer& renderer );
 
 private:

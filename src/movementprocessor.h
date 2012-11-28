@@ -1,5 +1,5 @@
 /*
- * basescreen.h
+ * movementprocessor.h
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,30 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef SCOTT_FORGE_BASESCREEN_H
-#define SCOTT_FORGE_BASESCREEN_H
+#ifndef SCOTT_FORGE_MOVEMENT_PROCESSOR_H
+#define SCOTT_FORGE_MOVEMENT_PROCESSOR_H
 
-#include "movementprocessor.h"
-
-struct GameAppContext;
-class Renderer;
-class GameTime;
+#include "abstractprocessor.h"
 
 /**
- * Base class for all game play related code
+ * Processes the movement of game objects
  */
-class BaseScreen
+class MovementProcessor : public AbstractProcessor
 {
 public:
-    BaseScreen();
-    virtual ~BaseScreen();
-
-    virtual void startup( GameAppContext& context ) = 0; // TODO: Pull this out
-    virtual void shutdown( GameAppContext& context ) = 0;
-    virtual void update( const GameTime& gameTime, GameAppContext& context ) = 0;
-    virtual void render( Renderer& renderer ) = 0;
+    MovementProcessor();
+    ~MovementProcessor();
 
 private:
+    virtual void onStart();
+    virtual void onStop();
+    virtual void onUpdate( const GameTime& time );
+    virtual void onGameObjectAttached( GameObject * pObject );
+    virtual void onGameObjectDetached( GameObject * pObject );
+
+    void updateObject( const GameTime& time, GameObject * object );
 };
 
 #endif

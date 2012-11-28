@@ -29,6 +29,7 @@ class GameTime;
 class GameObject
 {
 public:
+    GameObject();
     GameObject( Sprite * pSprite,
                 const Vector2& size,
                 const Vector2& position );

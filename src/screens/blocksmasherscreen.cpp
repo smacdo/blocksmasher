@@ -48,11 +48,11 @@ BlockSmasherScreen::~BlockSmasherScreen()
 /**
  * Update all objects
  */
-void BlockSmasherScreen::update( const GameTime& gameTime )
+void BlockSmasherScreen::update( const GameTime& gameTime, GameAppContext& context )
 {
     assert( mpBall != NULL && "How on earth is this null?" );
-    mpBall->update( gameTime );
-    mpPaddle->update( gameTime );
+//    mpBall->update( gameTime );
+//    mpPaddle->update( gameTime );
 }
 
 /**
@@ -81,10 +81,15 @@ void BlockSmasherScreen::startup( GameAppContext& context )
     mpPaddle = new Paddle( pPaddleSprite,
                            Vector2( paddleX, paddleY ),
                            300.0f );
+
+    context.pMovementProcessor->attachGameObject( mpBall );
 }
 
-void BlockSmasherScreen::shutdown()
+void BlockSmasherScreen::shutdown( GameAppContext& context )
 {
+    // TODO: change this to gameobject factory, no delete
+    context.pMovementProcessor->detachGameObject( mpBall );
+
     delete mpBall;
     delete mpPaddle;
 }

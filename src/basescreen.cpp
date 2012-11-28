@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 #include "basescreen.h"
+#include "movementprocessor.h"
 
 BaseScreen::BaseScreen()
 {

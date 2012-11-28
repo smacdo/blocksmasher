@@ -22,10 +22,13 @@
 
 struct SDL_Window;
 struct SDL_Renderer;
+class MovementProcessor;
 
 struct GameAppContext
 {
     GameAppContext();
+
+    MovementProcessor * pMovementProcessor;
 
     SDL_Window * pWindow;
     SDL_Renderer * pRenderer;

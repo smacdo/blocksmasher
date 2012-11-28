@@ -18,6 +18,7 @@
 #define SCOTT_FORGE_UTILS_H
 
 #include <string>
+#include <algorithm>
 #include <boost/checked_delete.hpp>
 
 enum EErrorType
@@ -37,6 +38,15 @@ void Delete( T*& pointer )
 {
     boost::checked_delete( pointer );
     pointer = NULL;
+}
+
+template<typename ContainerT>
+void DeleteContainer( ContainerT& container )
+{
+    std::for_each( container.begin(),
+                   container.end(),
+                   [](typename ContainerT::value_type x){ boost::checked_delete(x); } );
+    container.clear();
 }
 
 #endif
