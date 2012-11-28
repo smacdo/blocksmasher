@@ -20,6 +20,7 @@
 #include "basescreen.h"
 #include "gametime.h"
 #include "resourcesloader.h"
+#include "gameobjectfactory.h"
 
 #include <SDL.h>
 #include <string>
@@ -169,7 +170,11 @@ void GameApp::startup()
     SDL_LogSetPriority( SDL_LOG_CATEGORY_RENDER, SDL_LOG_PRIORITY_VERBOSE );
     SDL_LogSetPriority( SDL_LOG_CATEGORY_INPUT, SDL_LOG_PRIORITY_VERBOSE );
 
-    // Ensure the resources loader is loaded first
+    // Ensure the game object is the first thing created
+    GameObjectFactory * pFactory = new GameObjectFactory();
+    mContext.setGameObjectFactory( pFactory );
+
+    // Create the resources loader
     ResourcesLoader * pLoader = new ResourcesLoader();
     mContext.setResourcesLoader( pLoader );
 

@@ -40,8 +40,8 @@ public:
     void render( Renderer& renderer );
 
 private:
-    Paddle * mpPaddle;
-    Ball * mpBall;
+    GameObject * mpPaddle;
+    GameObject * mpBall;
 };
 
 #endif

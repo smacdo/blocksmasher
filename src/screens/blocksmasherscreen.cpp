@@ -15,12 +15,12 @@
  * limitations under the License.
  */
 #include "screens/blocksmasherscreen.h"
-#include "breakout/ball.h"
-#include "breakout/paddle.h"
 #include "renderer.h"
+#include "gameobject.h"
 #include "sprite.h"
 #include "resourcesloader.h"
 #include "gameappcontext.h"
+#include "gameobjectfactory.h"
 #include "config.h"
 
 #include <cassert>
@@ -65,23 +65,34 @@ void BlockSmasherScreen::render( Renderer& renderer )
 
 void BlockSmasherScreen::startup( GameAppContext& context )
 {
+    GameObjectFactory& factory = context.gameObjectFactory();
     Renderer& renderer = context.renderer();
 
     // Create the initial ball object
-    Sprite * pBallSprite = renderer.createSprite( "sample.bmp" );
-    mpBall = new Ball( pBallSprite, Vector2::ZERO, Vector2( 75.0f, 75.0f ) );
+    mpBall = factory.create();
+
+    mpBall->setSprite( renderer.createSprite( "sample.bmp" ) );
+    mpBall->setPosition( Vector2::ZERO );
+    mpBall->setVelocity( Vector2( 125.0f, 125.0f ) );
+    mpBall->setSize( Vector2( 16.0f, 16.0f ) );
 
     // Calculate the position of the player's paddle
     float paddleX = DEFAULT_WINDOW_WIDTH / 2.0f;
     float paddleY = DEFAULT_WINDOW_HEIGHT - 24.0f;
 
     // Create the player's paddle object
-    Sprite * pPaddleSprite = renderer.createSprite( "sample.bmp" );
-    mpPaddle = new Paddle( pPaddleSprite,
-                           Vector2( paddleX, paddleY ),
-                           300.0f );
+    mpPaddle = factory.create();
 
-    context.movementProcessor().attachGameObject( mpBall );
+    mpPaddle->setSprite( renderer.createSprite( "sample.bmp" ) );
+    mpPaddle->setPosition( Vector2( paddleX, paddleY ) - Vector2( 300.0f / 2.0f, 32.0f ));
+    mpPaddle->setSize( Vector2( 300.0f, 32.0f ) );
+    mpPaddle->setVelocity( Vector2( 50.0f, 0.0f ) );
+
+    // Register everything
+    MovementProcessor& movement = context.movementProcessor();
+
+    movement.attachGameObject( mpBall );
+    movement.attachGameObject( mpPaddle );
 }
 
 void BlockSmasherScreen::shutdown( GameAppContext& context )

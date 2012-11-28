@@ -199,8 +199,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\abstractprocessor.cpp" />
-    <ClCompile Include="src\breakout\ball.cpp" />
-    <ClCompile Include="src\breakout\paddle.cpp" />
     <ClCompile Include="src\gameapp.cpp" />
     <ClCompile Include="src\gameappcontext.cpp" />
     <ClCompile Include="src\basescreen.cpp" />
@@ -218,8 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\abstractprocessor.h" />
-    <ClInclude Include="src\breakout\ball.h" />
-    <ClInclude Include="src\breakout\paddle.h" />
     <ClInclude Include="src\config.h" />
     <ClInclude Include="src\gameapp.h" />
     <ClInclude Include="src\gameappcontext.h" />

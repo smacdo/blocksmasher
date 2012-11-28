@@ -18,6 +18,7 @@
 #include "config.h"
 #include "utils.h"
 
+#include "gameobjectfactory.h"
 #include "resourcesloader.h"
 #include "renderer.h"
 
@@ -29,7 +30,8 @@
 #include <SDL.h>
 
 GameAppContext::GameAppContext()
-    : mpMovementProcessor( NULL ),
+    : mpGameObjectFactory( NULL ),
+      mpMovementProcessor( NULL ),
       mpResourcesLoader( NULL ),
       mpRenderer( NULL ),
       pWindow( NULL ),
@@ -47,6 +49,14 @@ GameAppContext::GameAppContext()
 
 }
 
+/**
+ * Sets the game object factory
+ */
+void GameAppContext::setGameObjectFactory( GameObjectFactory * pFactory )
+{
+    Delete( mpGameObjectFactory );
+    mpGameObjectFactory = pFactory;
+}
 
 /**
  * Sets the resources loader
@@ -73,6 +83,24 @@ void GameAppContext::setMovementProcessor( MovementProcessor * pProcessor )
 {
     Delete( mpMovementProcessor );
     mpMovementProcessor = pProcessor;
+}
+
+/**
+ * Return the active game object factory as a reference
+ */
+GameObjectFactory& GameAppContext::gameObjectFactory()
+{
+    // Make sure the loader is created and set
+    assert( mpGameObjectFactory != NULL && "Must create game object factory before accessing" );
+
+    if ( mpGameObjectFactory == NULL )
+    {
+        raiseError( "Did not create game object factory prior to using it", EERROR_APP );
+    }
+
+    // This is going to fail horribly if we get this far and there's no valid
+    // pointer
+    return *mpGameObjectFactory;
 }
 
 /**

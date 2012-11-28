@@ -48,12 +48,6 @@
     <ClCompile Include="src\basescreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\breakout\ball.cpp">
-      <Filter>Source Files\blocksmasher</Filter>
-    </ClCompile>
-    <ClCompile Include="src\breakout\paddle.cpp">
-      <Filter>Source Files\blocksmasher</Filter>
-    </ClCompile>
     <ClCompile Include="src\resourcesloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -100,12 +94,6 @@
     </ClInclude>
     <ClInclude Include="src\basescreen.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\breakout\ball.h">
-      <Filter>Header Files\blocksmasher</Filter>
-    </ClInclude>
-    <ClInclude Include="src\breakout\paddle.h">
-      <Filter>Header Files\blocksmasher</Filter>
     </ClInclude>
     <ClInclude Include="src\gametime.h">
       <Filter>Header Files</Filter>

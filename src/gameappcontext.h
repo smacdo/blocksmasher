@@ -23,6 +23,7 @@
 struct SDL_Window;
 struct SDL_Renderer;
 
+class GameObjectFactory;
 class MovementProcessor;
 class ResourcesLoader;
 class Renderer;
@@ -34,14 +35,18 @@ class GameAppContext
 {
 public:
     GameAppContext();
-
+    
+    void setGameObjectFactory( GameObjectFactory* pFactory );
     void setResourcesLoader( ResourcesLoader *pLoader );
     void setRenderer( Renderer * pRenderer );
     void setMovementProcessor( MovementProcessor * pProcessor );
     
+    GameObjectFactory& gameObjectFactory();
     ResourcesLoader& resourcesLoader();
     Renderer& renderer();
     MovementProcessor& movementProcessor();
+
+    GameObjectFactory * mpGameObjectFactory;
 
     MovementProcessor * mpMovementProcessor;
     ResourcesLoader * mpResourcesLoader;

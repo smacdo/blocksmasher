@@ -41,6 +41,7 @@ public:
     virtual ~GameObject();
 
     const Sprite * sprite() const;
+    void setSprite( Sprite * pSprite );
 
     Vector2 position() const;
     void setPosition( const Vector2& position );

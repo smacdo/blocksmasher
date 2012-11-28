@@ -118,11 +118,33 @@ Vector2 GameObject::size() const
 }
 
 /**
+ * Sets the game object's sprite object
+ */
+void GameObject::setSprite( Sprite * pSprite )
+{
+    mpSprite = pSprite;
+}
+
+/**
  * Set the position of the game object
  */
 void GameObject::setPosition( const Vector2& position )
 {
     mPosition = position;
+}
+
+/**
+ * Set the size of the game object
+ */
+void GameObject::setSize( const Vector2& size )
+{
+    mSize = size;
+
+    // TODO: don't do this, have the renderer look up the size correctly?
+    if ( mpSprite != NULL )
+    {
+        mpSprite->setSize( size );
+    }
 }
 
 /**
