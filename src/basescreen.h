@@ -19,7 +19,7 @@
 
 #include "movementprocessor.h"
 
-struct GameAppContext;
+class GameAppContext;
 class Renderer;
 class GameTime;
 

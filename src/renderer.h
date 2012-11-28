@@ -25,13 +25,14 @@ struct SDL_Texture;
 class GameTime;
 class Sprite;
 class Vector2;
+class GameAppContext;
 
 typedef std::map< std::string, SDL_Texture* > texture_cache_t;
 
 class Renderer
 {
 public:
-    Renderer( SDL_Renderer *pRenderer );
+    Renderer( GameAppContext& mGameContext, SDL_Renderer *pRenderer );
     ~Renderer();
 
     Sprite * createSprite( const std::string& imagePath );
@@ -42,6 +43,7 @@ public:
     void present();
 
 private:
+    GameAppContext& mGameContext;
     SDL_Renderer * mpRenderer;
     texture_cache_t mCachedTextures;
 };

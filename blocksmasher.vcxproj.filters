@@ -57,9 +57,6 @@
     <ClCompile Include="src\resourcesloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\screens\blocksmasherscreen.cpp">
       <Filter>Source Files\blocksmasher</Filter>
     </ClCompile>
@@ -114,9 +111,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\resourcesloader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\screens\blocksmasherscreen.h">

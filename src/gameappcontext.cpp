@@ -1,5 +1,5 @@
 /*
- * gameapp.cpp
+ * gameappcontext.cpp
  * Copyright 2012 Scott MacDonald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +16,24 @@
  */
 #include "gameappcontext.h"
 #include "config.h"
+#include "utils.h"
+
+#include "resourcesloader.h"
+#include "renderer.h"
+
+#include "movementprocessor.h"
 
 #include <string>
 #include <vector>
+#include <cassert>
 #include <SDL.h>
 
 GameAppContext::GameAppContext()
-    : pMovementProcessor( NULL ),
+    : mpMovementProcessor( NULL ),
+      mpResourcesLoader( NULL ),
+      mpRenderer( NULL ),
       pWindow( NULL ),
-      pRenderer( NULL ),
+      pSdlRenderer( NULL ),
       glContext( NULL ),
       isQuiting( false ),
       display( "NULL", 0, 0, 0 ),
@@ -36,4 +45,86 @@ GameAppContext::GameAppContext()
       window_count( 1 )
 {
 
+}
+
+
+/**
+ * Sets the resources loader
+ */
+void GameAppContext::setResourcesLoader( ResourcesLoader * pResourcesLoader )
+{
+    Delete( mpResourcesLoader );
+    mpResourcesLoader = pResourcesLoader;
+}
+
+/**
+ * Sets the renderer
+ */
+void GameAppContext::setRenderer( Renderer * pRenderer )
+{
+    Delete( mpRenderer );
+    mpRenderer = pRenderer;
+}
+
+/**
+ * Sets the movement processor
+ */
+void GameAppContext::setMovementProcessor( MovementProcessor * pProcessor )
+{
+    Delete( mpMovementProcessor );
+    mpMovementProcessor = pProcessor;
+}
+
+/**
+ * Return the active resources loader as a reference
+ */
+ResourcesLoader& GameAppContext::resourcesLoader()
+{
+    // Make sure the loader is created and set
+    assert( mpResourcesLoader != NULL && "Must create resources loader before accessing" );
+
+    if ( mpResourcesLoader == NULL )
+    {
+        raiseError( "Did not create resources loader prior to using it", EERROR_APP );
+    }
+
+    // This is going to fail horribly if we get this far and there's no valid
+    // pointer
+    return *mpResourcesLoader;
+}
+
+/**
+ * Return the active renderer as a reference
+ */
+Renderer& GameAppContext::renderer()
+{
+    // Make sure the renderer is created and set
+    assert( mpRenderer != NULL && "Must create renderer before accessing" );
+
+    if ( mpRenderer == NULL )
+    {
+        raiseError( "Did not create renderer prior to using it", EERROR_APP );
+    }
+
+    // This is going to fail horribly if we get this far and there's no valid
+    // pointer
+    return *mpRenderer;
+}
+
+/**
+ * Gets the movement processor
+ */
+MovementProcessor& GameAppContext::movementProcessor()
+{
+    // Make sure the renderer is created and set
+    assert( mpMovementProcessor != NULL && "Must create renderer before accessing" );
+
+    if ( mpMovementProcessor == NULL )
+    {
+        raiseError( "Did not create movement processor prior to using it", EERROR_APP );
+    }
+
+    // This is going to fail horribly if we get this far and there's no valid
+    // pointer
+    return *mpMovementProcessor;
 }

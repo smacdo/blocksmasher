@@ -22,16 +22,33 @@
 
 struct SDL_Window;
 struct SDL_Renderer;
-class MovementProcessor;
 
-struct GameAppContext
+class MovementProcessor;
+class ResourcesLoader;
+class Renderer;
+
+/**
+ * Gigantic structure of relevant information for the game
+ */
+class GameAppContext
 {
+public:
     GameAppContext();
 
-    MovementProcessor * pMovementProcessor;
+    void setResourcesLoader( ResourcesLoader *pLoader );
+    void setRenderer( Renderer * pRenderer );
+    void setMovementProcessor( MovementProcessor * pProcessor );
+    
+    ResourcesLoader& resourcesLoader();
+    Renderer& renderer();
+    MovementProcessor& movementProcessor();
+
+    MovementProcessor * mpMovementProcessor;
+    ResourcesLoader * mpResourcesLoader;
+    Renderer * mpRenderer;
 
     SDL_Window * pWindow;
-    SDL_Renderer * pRenderer;
+    SDL_Renderer * pSdlRenderer;
     void * glContext;
     bool isQuiting;
 

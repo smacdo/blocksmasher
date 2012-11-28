@@ -23,7 +23,7 @@ class Ball;
 class Renderer;
 class Paddle;
 class GameTime;
-struct GameAppContext;
+class GameAppContext;
 
 /**
  * Main game play implementation of breakout

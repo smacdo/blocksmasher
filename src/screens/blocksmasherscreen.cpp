@@ -19,7 +19,6 @@
 #include "breakout/paddle.h"
 #include "renderer.h"
 #include "sprite.h"
-#include "application.h"
 #include "resourcesloader.h"
 #include "gameappcontext.h"
 #include "config.h"
@@ -66,7 +65,7 @@ void BlockSmasherScreen::render( Renderer& renderer )
 
 void BlockSmasherScreen::startup( GameAppContext& context )
 {
-    Renderer& renderer = Application::renderer();
+    Renderer& renderer = context.renderer();
 
     // Create the initial ball object
     Sprite * pBallSprite = renderer.createSprite( "sample.bmp" );
@@ -82,13 +81,13 @@ void BlockSmasherScreen::startup( GameAppContext& context )
                            Vector2( paddleX, paddleY ),
                            300.0f );
 
-    context.pMovementProcessor->attachGameObject( mpBall );
+    context.movementProcessor().attachGameObject( mpBall );
 }
 
 void BlockSmasherScreen::shutdown( GameAppContext& context )
 {
     // TODO: change this to gameobject factory, no delete
-    context.pMovementProcessor->detachGameObject( mpBall );
+    context.movementProcessor().detachGameObject( mpBall );
 
     delete mpBall;
     delete mpPaddle;

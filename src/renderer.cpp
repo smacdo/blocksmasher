@@ -16,7 +16,7 @@
  */
 #include "renderer.h"
 #include "sprite.h"
-#include "application.h"
+#include "gameappcontext.h"
 #include "resourcesloader.h"
 #include "gametime.h"
 #include "utils.h"
@@ -33,8 +33,9 @@
 /**
  * Constructor
  */
-Renderer::Renderer( SDL_Renderer *pRenderer )
-    : mpRenderer( pRenderer ),
+Renderer::Renderer( GameAppContext& gameContext, SDL_Renderer *pRenderer )
+    : mGameContext( gameContext ),
+      mpRenderer( pRenderer ),
       mCachedTextures()
 {
 }
@@ -61,7 +62,7 @@ Renderer::~Renderer()
  */
 Sprite * Renderer::createSprite( const std::string& imagePath )
 {
-    ResourcesLoader& resources = Application::resources();
+    ResourcesLoader& resources = mGameContext.resourcesLoader();
 
     // Obtain a SDL_Texture instance representing this image. First search the
     // texture cache to see if image was already loaded, and if not then load it

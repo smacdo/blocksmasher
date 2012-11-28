@@ -20,7 +20,6 @@
 #include "basescreen.h"
 #include "gametime.h"
 #include "resourcesloader.h"
-#include "application.h"
 
 #include <SDL.h>
 #include <string>
@@ -132,7 +131,7 @@ void GameApp::doUpdate( const GameTime& time )
     assert( mpGameScreen != NULL && "How on earth did you become null?" );
 
     // Update our processors
-    mContext.pMovementProcessor->update( time );
+    mContext.movementProcessor().update( time );
 
     // Now let the game screen itself do any needed processing
     mpGameScreen->update( time, mContext );
@@ -147,7 +146,7 @@ void GameApp::doRender( const GameTime& time )
 
     // Clear the screen before letting the active game scene take a crack at
     // drawing
-    Renderer& renderer = Application::renderer();
+    Renderer& renderer = mContext.renderer();
 
     renderer.clear();
     mpGameScreen->render( renderer );
@@ -169,6 +168,10 @@ void GameApp::startup()
     SDL_LogSetPriority( SDL_LOG_CATEGORY_VIDEO, SDL_LOG_PRIORITY_VERBOSE );
     SDL_LogSetPriority( SDL_LOG_CATEGORY_RENDER, SDL_LOG_PRIORITY_VERBOSE );
     SDL_LogSetPriority( SDL_LOG_CATEGORY_INPUT, SDL_LOG_PRIORITY_VERBOSE );
+
+    // Ensure the resources loader is loaded first
+    ResourcesLoader * pLoader = new ResourcesLoader();
+    mContext.setResourcesLoader( pLoader );
 
     // Find all video drivers
     int driverCount = SDL_GetNumVideoDrivers();
@@ -215,25 +218,20 @@ void GameApp::startup()
                          SDL_RENDERER_PRESENTVSYNC |
                          SDL_RENDERER_TARGETTEXTURE;
 
-    mContext.pRenderer = SDL_CreateRenderer( mContext.pWindow,
-                                             -1,
-                                             renderFlags );
+    mContext.pSdlRenderer = SDL_CreateRenderer( mContext.pWindow, -1, renderFlags );
 
-    if ( mContext.pRenderer == NULL )
+    if ( mContext.pSdlRenderer == NULL )
     {
         raiseError( "Failed to create hardware accelerated renderer",
                     EERROR_SDL );
     }
 
-    // Set up our subsystems
-    ResourcesLoader * pLoader = new ResourcesLoader();
-    Application::instance().setResourcesLoader( pLoader );
-
-    Renderer * pRenderer = new Renderer( mContext.pRenderer );
-    Application::instance().setRenderer( pRenderer );
+    // Setup the forge graphics renderer
+    Renderer * pRenderer = new Renderer( mContext, mContext.pSdlRenderer );
+    mContext.setRenderer( pRenderer );
 
     // Set up our processors
-    mContext.pMovementProcessor = new MovementProcessor();
+    mContext.setMovementProcessor( new MovementProcessor() );
 
     // So what happened?
     SDL_Log( "Using %s video driver\n", SDL_GetCurrentVideoDriver() );
@@ -251,8 +249,8 @@ void GameApp::shutdown()
     delete mpGameScreen;
 
     // Destroy our subsystems
-    Application::instance().setRenderer( NULL );
-    Application::instance().setResourcesLoader( NULL );
+    mContext.setRenderer( NULL );
+    mContext.setResourcesLoader( NULL );
 
     // Now unload our OpenGL context
     if ( mContext.glContext )
@@ -260,9 +258,9 @@ void GameApp::shutdown()
         SDL_GL_DeleteContext( mContext.glContext );
     }
 
-    if ( mContext.pRenderer != NULL )
+    if ( mContext.pSdlRenderer != NULL )
     {
-        SDL_DestroyRenderer( mContext.pRenderer );
+        SDL_DestroyRenderer( mContext.pSdlRenderer );
     }
 
     if ( mContext.pWindow != NULL )
