@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 #include "gameobject.h"
-#include "gametime.h"
+#include "gameobjectid.h"
 #include "sprite.h"
 #include "config.h"        // for window width/height
 #include "utils.h"
@@ -23,52 +23,15 @@
 #include <cassert>
 #include <iostream>
 
-GameObject::GameObject()
-    : mpSprite( NULL ),
+GameObject::GameObject( game_object_id_t id )
+    : mId( id ),
+      mpSprite( NULL ),
       mSize( 0, 0 ),
       mPosition( 0, 0 ),
       mVelocity( 0, 0 )
 {
 
 }
-
-/**
- * Game object constructor
- */
-GameObject::GameObject( Sprite * pSprite,
-                        const Vector2& size,
-                        const Vector2& position )
-    : mpSprite( pSprite ),
-      mSize( size ),
-      mPosition( position ),
-      mVelocity( 0.0f, 0.0f )
-{
-    assert( pSprite != NULL && "Did you really think that would fly?" );
-
-    // Re-assign the sprite to the correct size of the ball object
-    //  temp-hack...
-    pSprite->setSize( mSize );
-}
-
-/**
- * Game object constructor
- */
-GameObject::GameObject( Sprite * pSprite,
-                        const Vector2& size,
-                        const Vector2& position,
-                        const Vector2& velocity )
-    : mpSprite( pSprite ),
-      mSize( size ),
-      mPosition( position ),
-      mVelocity( velocity )
-{
-    assert( pSprite != NULL && "Did you really think that would fly?" );
-
-    // Re-assign the sprite to the correct size of the ball object
-    //  temp-hack...
-    pSprite->setSize( mSize );
-}
-
 /**
  * Destructor
  */

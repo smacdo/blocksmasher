@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 #include "gameobjectfactory.h"
+#include "gameobjectid.h"
 #include "gameobject.h"
 #include "utils.h"
 
@@ -23,10 +24,11 @@
 
 GameObjectFactory::GameObjectFactory()
     : mAliveGameObjects(),
-      mGameObjectsToDestroy()
+      mGameObjectsToDestroy(),
+      mpNextId( new game_object_id_t( 1 ) )
 {
 
-}
+} 
 
 GameObjectFactory::~GameObjectFactory()
 {
@@ -40,7 +42,7 @@ GameObjectFactory::~GameObjectFactory()
 GameObject * GameObjectFactory::create()
 {
     // Create the game object
-    GameObject * pObject = new GameObject();
+    GameObject * pObject = new GameObject( generateNewId() );
 
     // Register the game object so we can keep track of it in the future
     mAliveGameObjects.insert( pObject );
@@ -77,4 +79,14 @@ void GameObjectFactory::processPendingDeletes()
     }
 
     mGameObjectsToDestroy.clear();
+}
+
+game_object_id_t GameObjectFactory::generateNewId()
+{
+    // this is not thread safe... if we allocate objects in separate threads
+    // we'll need to do it smarter
+    game_object_id_t nextId = *mpNextId;
+    *mpNextId = *mpNextId + 1;
+
+    return nextId;
 }

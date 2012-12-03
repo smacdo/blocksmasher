@@ -18,6 +18,7 @@
 #define SCOTT_FORGE_GAME_OBJECT_H
 
 #include "math/vector2.h"
+#include "gameobjectid.h"
 
 class Sprite;
 class GameTime;
@@ -29,16 +30,8 @@ class GameTime;
 class GameObject
 {
 public:
-    GameObject();
-    GameObject( Sprite * pSprite,
-                const Vector2& size,
-                const Vector2& position );
-
-    GameObject( Sprite * pSprite,
-                const Vector2& size,
-                const Vector2& position,
-                const Vector2& veloicty );
-    virtual ~GameObject();
+    GameObject( game_object_id_t id );
+    ~GameObject();
 
     const Sprite * sprite() const;
     void setSprite( Sprite * pSprite );
@@ -61,6 +54,7 @@ public:
     float height() const;
 
 protected:
+    game_object_id_t mId;
     Sprite * mpSprite;
     Vector2 mSize;
     Vector2 mPosition;

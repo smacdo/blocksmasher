@@ -222,6 +222,7 @@
     <ClInclude Include="src\basescreen.h" />
     <ClInclude Include="src\gameobject.h" />
     <ClInclude Include="src\gameobjectfactory.h" />
+    <ClInclude Include="src\gameobjectid.h" />
     <ClInclude Include="src\gametime.h" />
     <ClInclude Include="src\math\vector2.h" />
     <ClInclude Include="src\movementprocessor.h" />

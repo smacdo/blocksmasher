@@ -50,8 +50,6 @@ BlockSmasherScreen::~BlockSmasherScreen()
 void BlockSmasherScreen::update( const GameTime& gameTime, GameAppContext& context )
 {
     assert( mpBall != NULL && "How on earth is this null?" );
-//    mpBall->update( gameTime );
-//    mpPaddle->update( gameTime );
 }
 
 /**

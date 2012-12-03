@@ -116,5 +116,8 @@
     <ClInclude Include="src\movementprocessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\gameobjectid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

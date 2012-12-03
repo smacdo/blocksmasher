@@ -17,6 +17,8 @@
 #ifndef SCOTT_FORGE_GAME_OBJECT_FACTORY_H
 #define SCOTT_FORGE_GAME_OBJECT_FACTORY_H
 
+#include "gameobjectid.h"
+
 #include <set>
 #include <boost/noncopyable.hpp>
 
@@ -37,10 +39,12 @@ public:
 
 private:
     void processPendingDeletes();
+    game_object_id_t generateNewId();
 
 private:
     std::set<GameObject*> mAliveGameObjects;
     std::set<GameObject*> mGameObjectsToDestroy;
+    game_object_id_t * mpNextId;
 };
 
 #endif
