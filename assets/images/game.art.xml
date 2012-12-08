@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<!--
+     Defines an "artfile". An artfile is a collection of named and optionally
+     animated sprite images that are packed into one or more sprite atlas
+     images.
+
+     All the information for the artfile, including the sprites, animations
+     and atlas images are written out to the binary .art file.
+
+     This file tells the assettool how to build this artfile
+-->
+<artfile>
+    <atlasproperties>
+        <forcepow2>true</forcepow2>
+		<forcesquare>true</forcesquare>
+		<maxsize>1024</maxsize>
+		<padding>0</padding>
+	</atlasproperties>
+
+	<sprites>
+		<sprite name="background">
+			<animation name="DEFAULT">
+				<image>background_clouds</image>
+			</animation>
+		</sprite>
+		<static_sprite name="ball">
+			<image>ball</image>
+		</static_sprite>
+		<static_sprite name="paddle">
+			<image>paddle</image>
+		</static_sprite>
+	</sprites>
+</artfile>

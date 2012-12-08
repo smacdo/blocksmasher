@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<attributions>
+	<attribution id="scott">
+		<author>Scott MacDonald</author>
+		<email>scott@whitespaceconsideredharmful.com</email>
+		<url>http://www.whitespaceconsideredharmful.com/</url>
+		<license>
+			<cc_by />
+		</license>
+	</attribution>
+	<attribution id="bart">
+		<author>bart</author>
+		<url>http://opengameart.org/content/sky-backdrop</url>
+		<license>
+			<cc_by3 />
+			<cc_by_sa3 />
+			<gpl3 />
+			<gpl2 />
+		</license>
+	</attribution>
+</attributions>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<!--
+     This file contains the meta data required to build one or more
+     .bundle files for an application
+
+     game_id:   Unique identifier identifying the game
+-->
+<resourcedatabase game_name="Breakout" game_id="1">
+	<attributions>
+		<file>images/attributions.xml</file>
+	</attributions>
+	<resources>
+		<!-- List of images used by the game -->
+		<image id="brick0" format="RGB24">images/brick0.png</image>
+		<image id="brick1" format="RGB24">images/brick1.png</image>
+		<image id="brick2" format="RGB24">images/brick2.png</image>
+		<image id="brick3" format="RGB24">images/brick3.png</image>
+		<image id="brick4" format="RGB24">images/brick4.png</image>
+		<image id="ball" format="RGB24">images/paddle.png</image>
+		<image id="paddle" format="RGB24">images/paddle.png</image>
+		<image id="background" format="RGB24" attribution="bart">images/background_clouds.png</image>
+		<art id="art/game">images/game.art.xml</art>
+		<art id="art/bricks">images/bricks.art.xml</art>
+	</resources>
+    <!--
+         Lists a .bundle composed of multiple source assets
+           name:      Name of the bundle
+           destdir:   Directory where the bundle will be placed
+           compress:  If the bundle's assets should be compressed
+           version:   What version of the bundle is this?
+
+         Each source asset supports the following attributes:
+           attribution:  An attribution identifier, maps to attributions
+           name:         What name to use when writing it into the bundle
+    -->
+	<bundles>
+		<bundle name="core" destdir="" compress="true" version="1">
+			<art>art/game</art>
+			<art>art/bricks</art>
+		</bundle>
+	</bundles>
+</resourcedatabase>

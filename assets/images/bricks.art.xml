@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<artfile>
+    <atlasproperties>
+        <forcepow2>true</forcepow2>
+		<forcesquare>true</forcesquare>
+		<maxsize>1024</maxsize>
+		<padding>0</padding>
+	</atlasproperties>
+
+	<sprites>
+		<static_sprite name="brick0">
+			<image>brick0</image>
+		</static_sprite>
+		<static_sprite name="brick1">
+			<image>brick1</image>
+		</static_sprite>
+		<static_sprite name="brick2">
+			<image>brick2</image>
+		</static_sprite>
+		<static_sprite name="brick3">
+			<image>brick3</image>
+		</static_sprite>
+		<static_sprite name="brick4">
+			<image>brick4</image>
+		</static_sprite>
+	</sprites>
+</artfile>
