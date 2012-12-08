@@ -21,7 +21,7 @@
 #include "gameobjectfactory.h"
 #include "resourcesloader.h"
 #include "renderer.h"
-
+#include "inputmanager.h"
 #include "movementprocessor.h"
 
 #include <string>
@@ -34,6 +34,7 @@ GameAppContext::GameAppContext()
       mpMovementProcessor( NULL ),
       mpResourcesLoader( NULL ),
       mpRenderer( NULL ),
+      mpInputManager( NULL ),
       pWindow( NULL ),
       pSdlRenderer( NULL ),
       glContext( NULL ),
@@ -84,6 +85,16 @@ void GameAppContext::setMovementProcessor( MovementProcessor * pProcessor )
     Delete( mpMovementProcessor );
     mpMovementProcessor = pProcessor;
 }
+
+/**
+ * Sets the input processor
+ */
+void GameAppContext::setInputManager( InputManager * pManager )
+{
+    Delete( mpInputManager );
+    mpInputManager = pManager;
+}
+
 
 /**
  * Return the active game object factory as a reference
@@ -155,4 +166,19 @@ MovementProcessor& GameAppContext::movementProcessor()
     // This is going to fail horribly if we get this far and there's no valid
     // pointer
     return *mpMovementProcessor;
+}
+
+InputManager& GameAppContext::inputManager()
+{
+    // Make sure the renderer is created and set
+    assert( mpInputManager != NULL && "Must create input manager before accessing" );
+
+    if ( mpInputManager == NULL )
+    {
+        raiseError( "Did not create movement processor prior to using it", EERROR_APP );
+    }
+
+    // This is going to fail horribly if we get this far and there's no valid
+    // pointer
+    return *mpInputManager;
 }

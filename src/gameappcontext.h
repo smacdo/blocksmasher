@@ -27,6 +27,7 @@ class GameObjectFactory;
 class MovementProcessor;
 class ResourcesLoader;
 class Renderer;
+class InputManager;
 
 /**
  * Gigantic structure of relevant information for the game
@@ -40,17 +41,20 @@ public:
     void setResourcesLoader( ResourcesLoader *pLoader );
     void setRenderer( Renderer * pRenderer );
     void setMovementProcessor( MovementProcessor * pProcessor );
-    
+    void setInputManager( InputManager * pInputManager );
+
     GameObjectFactory& gameObjectFactory();
     ResourcesLoader& resourcesLoader();
     Renderer& renderer();
     MovementProcessor& movementProcessor();
+    InputManager& inputManager();
 
     GameObjectFactory * mpGameObjectFactory;
 
     MovementProcessor * mpMovementProcessor;
     ResourcesLoader * mpResourcesLoader;
     Renderer * mpRenderer;
+    InputManager * mpInputManager;
 
     SDL_Window * pWindow;
     SDL_Renderer * pSdlRenderer;

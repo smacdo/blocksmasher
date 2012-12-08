@@ -21,6 +21,7 @@
 #include "gametime.h"
 #include "resourcesloader.h"
 #include "gameobjectfactory.h"
+#include "inputmanager.h"
 
 #include <SDL.h>
 #include <string>
@@ -113,14 +114,32 @@ void GameApp::doInput( const GameTime& time )
 {
     SDL_Event event;
 
-    // Check for any input or window events
+    // Process the input queue and dispatch events to their proper managers for
+    // handling
+    InputManager& input = mContext.inputManager();
+
     while ( SDL_PollEvent( &event ) )
     {
-        // Did the player press exit?
-        if ( event.type == SDL_QUIT )
+        switch ( event.type )
         {
-            mContext.isQuiting = true;
+            case SDL_KEYDOWN:
+                input.processKeyboardInput( event.key.keysym, true );
+                break;
+
+            case SDL_KEYUP:
+                input.processKeyboardInput( event.key.keysym, false );
+                break;
+
+            case SDL_QUIT:
+                mContext.isQuiting = true;
+                break;
         }
+    }
+
+    // Did the player want to quit?
+    if ( input.escapedPressed() )
+    {
+        mContext.isQuiting = true;
     }
 }
 
@@ -238,6 +257,9 @@ void GameApp::startup()
     // Set up our processors
     mContext.setMovementProcessor( new MovementProcessor() );
 
+    // Rest of the system
+    mContext.setInputManager( new InputManager );
+
     // So what happened?
     SDL_Log( "Using %s video driver\n", SDL_GetCurrentVideoDriver() );
 }
@@ -256,6 +278,7 @@ void GameApp::shutdown()
     // Destroy our subsystems
     mContext.setRenderer( NULL );
     mContext.setResourcesLoader( NULL );
+    mContext.setInputManager( NULL );
 
     // Now unload our OpenGL context
     if ( mContext.glContext )
